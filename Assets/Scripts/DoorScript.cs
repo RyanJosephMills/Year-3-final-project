@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class DoorScript : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class DoorScript : MonoBehaviour
     public GameObject openText;
     public GameObject KeyINV;
     public GameObject KeyINV2;
+    public GameObject doorLocked;
+    public GameObject doorUnlocked;
     PlayerMovement playerMovement;
 
     private void Awake()
@@ -47,6 +51,7 @@ public class DoorScript : MonoBehaviour
         {
             inReach = false;
             openText.SetActive(false);
+            doorLocked.SetActive(false);
         }
 
     }
@@ -58,10 +63,12 @@ public class DoorScript : MonoBehaviour
         {
             locked = false;
             hasKey = true;
+
         }
         else
         {
             hasKey = false;
+
         }
 
         if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey)
@@ -69,8 +76,10 @@ public class DoorScript : MonoBehaviour
             unlocked = true;
             DoorOpens();
         }
-        else
+        else if(playerMovement.IsInteractPressed && inReach)
         {
+            doorLocked.SetActive(true);
+            doorLocked.GetComponent<TMP_Text>().text = "Door Is Locked";
             DoorCloses();
         }
     }
@@ -84,4 +93,5 @@ public class DoorScript : MonoBehaviour
         Door.SetBool("Open", false);
         Door.SetBool("Closed", true);
     }
+
 }
