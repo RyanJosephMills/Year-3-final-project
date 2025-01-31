@@ -1,0 +1,203 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+
+// This Code was from a tutorial on Youtube however I have no idea where the video has gone 
+[RequireComponent(typeof(CharacterController))]
+public class PlayerMovement : MonoBehaviour
+{
+    public Camera playerCamera;
+    public float walkSpeed = 6f;
+    public float runSpeed = 12f;
+    public float jumpPower = 7f;
+    public float gravity = 10f;
+    public float lookSpeed = 2f;
+    public float lookXLimit = 45f;
+    public float defaultHeight = 2f;
+    public float crouchHeight = 1f;
+    public float crouchSpeed = 3f;
+
+    private Vector3 moveDirection = Vector3.zero;
+    private float rotationX = 0;
+    private CharacterController characterController;
+
+
+    public bool canMove = true;
+
+
+
+    [Header("Player Input Variables")]
+    private PlayerInputSystem playerInputSystem;
+    public Vector2 MoveInput;
+    public Vector2 CameraInput;
+    public bool IsInteractPressed;
+    public bool IsFlashlightPressed;
+    public bool IsJumpPressed;
+    public bool IsReloadPressed;
+    public bool Sprinting;
+    public bool Crouching;
+    public bool IsMenuPressed;
+
+
+
+
+    void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void Update()
+    {
+        if (canMove)
+        {
+            CheckJump();
+            ApplyMovement();
+            CheckCrouch();
+            ApplyCamera();
+        }
+    }
+
+    private void ApplyMovement()
+    {
+        float moveDirectionY = moveDirection.y;
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+        float curSpeedX = (Sprinting ? runSpeed : walkSpeed) * MoveInput.y;
+        float curSpeedY = (Sprinting ? runSpeed : walkSpeed) * MoveInput.x;
+        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        if (!characterController.isGrounded)
+        {
+            Debug.Log("Bruh");
+            moveDirectionY -= gravity * Time.deltaTime;
+        }
+        moveDirection.y = moveDirectionY;
+        characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    private void CheckCrouch()
+    {
+        Debug.Log(Crouching);
+        if (Crouching)
+        {
+            characterController.height = crouchHeight;
+            walkSpeed = crouchSpeed;
+            runSpeed = crouchSpeed;
+
+        }
+        else
+        {
+            characterController.height = defaultHeight;
+            walkSpeed = 6f;
+            runSpeed = 12f;
+        }
+    }
+
+    private void CheckJump()
+    {
+        Debug.Log(IsJumpPressed);
+        if (characterController.isGrounded && IsJumpPressed)
+        {
+            moveDirection.y = jumpPower;
+        }
+    }
+
+    private void ApplyCamera()
+    {
+        rotationX += -CameraInput.y * lookSpeed;
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.rotation *= Quaternion.Euler(0, CameraInput.x * lookSpeed, 0);
+    }
+
+
+
+    private void OnEnable()
+    {
+        playerInputSystem = new();
+        playerInputSystem.Enable();
+        playerInputSystem.Main.Move.performed += OnMove;
+        playerInputSystem.Main.Move.canceled += OnMove;
+        playerInputSystem.Main.Look.performed += OnLook;
+        playerInputSystem.Main.Look.canceled += OnLook;
+        playerInputSystem.Main.Sprint.performed += OnSprint;
+        playerInputSystem.Main.Sprint.canceled += OnSprint;
+        playerInputSystem.Main.Crouch.performed += OnCrouch;
+        playerInputSystem.Main.Crouch.canceled += OnCrouch;
+        playerInputSystem.Main.Interact.performed += OnInteract;
+        playerInputSystem.Main.Interact.canceled += OnInteract;
+        playerInputSystem.Main.Flashlight.performed += OnFlashlight;
+        playerInputSystem.Main.Jump.performed += OnJump;
+        playerInputSystem.Main.Jump.canceled += OnJump;
+        playerInputSystem.Main.Reload.performed += OnReload;
+        playerInputSystem.Main.MenuOpenClose.performed += OnMenu;
+    }
+
+    private void OnDisable()
+    {
+        playerInputSystem = new();
+        playerInputSystem.Disable();
+        playerInputSystem.Main.Move.performed -= OnMove;
+        playerInputSystem.Main.Move.canceled -= OnMove;
+        playerInputSystem.Main.Look.performed -= OnLook;
+        playerInputSystem.Main.Look.canceled -= OnLook;
+        playerInputSystem.Main.Sprint.performed -= OnSprint;
+        playerInputSystem.Main.Sprint.canceled -= OnSprint;
+        playerInputSystem.Main.Crouch.performed -= OnCrouch;
+        playerInputSystem.Main.Crouch.canceled -= OnCrouch;
+        playerInputSystem.Main.Interact.performed -= OnInteract;
+        playerInputSystem.Main.Interact.canceled -= OnInteract;
+        playerInputSystem.Main.Flashlight.performed -= OnFlashlight;
+        playerInputSystem.Main.Jump.performed -= OnJump;
+        playerInputSystem.Main.Jump.canceled -= OnJump;
+        playerInputSystem.Main.Reload.performed -= OnReload;
+        playerInputSystem.Main.MenuOpenClose.performed -= OnMenu;
+    }
+
+    private void OnMove(InputAction.CallbackContext action)
+    {
+        MoveInput = action.ReadValue<Vector2>();
+    }
+    private void OnLook(InputAction.CallbackContext action)
+    {
+        CameraInput = action.ReadValue<Vector2>();
+    }
+
+    private void OnSprint(InputAction.CallbackContext action)
+    {
+        Sprinting = action.ReadValueAsButton();
+    }
+    private void OnCrouch(InputAction.CallbackContext action)
+    {
+        Crouching = action.ReadValueAsButton();
+    }
+
+    private void OnInteract(InputAction.CallbackContext action)
+    {
+        IsInteractPressed = action.ReadValueAsButton();
+    }
+
+    private void OnFlashlight(InputAction.CallbackContext action)
+    {
+        IsFlashlightPressed = !IsFlashlightPressed;
+    }
+
+    private void OnJump(InputAction.CallbackContext action)
+    {
+        IsJumpPressed = action.ReadValueAsButton();
+    }
+
+    private void OnReload(InputAction.CallbackContext action)
+    {
+        IsReloadPressed = action.ReadValueAsButton();
+    }
+
+    private void OnMenu(InputAction.CallbackContext action)
+    {
+        IsMenuPressed = action.ReadValueAsButton();
+    }
+
+}
