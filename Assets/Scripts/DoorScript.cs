@@ -52,6 +52,7 @@ public class DoorScript : MonoBehaviour
             inReach = false;
             openText.SetActive(false);
             doorLocked.SetActive(false);
+            doorUnlocked.SetActive(false);
         }
 
     }
@@ -75,13 +76,21 @@ public class DoorScript : MonoBehaviour
         {
             unlocked = true;
             DoorOpens();
+            doorUnlocked.SetActive(true);
+            doorUnlocked.GetComponent<TMP_Text>().text = "Door Is Unlocked";
         }
-       else if(playerMovement.IsInteractPressed && inReach)
+        else
         {
-            doorLocked.SetActive(true);
-            doorLocked.GetComponent<TMP_Text>().text = "Door Is Locked";
             DoorCloses();
         }
+        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
+        {
+            unlocked = false;
+            DoorCloses();
+            doorLocked.SetActive(true);
+            doorLocked.GetComponent<TMP_Text>().text = "Door Is Locked";
+        }
+
     }
     void DoorOpens()
     {
