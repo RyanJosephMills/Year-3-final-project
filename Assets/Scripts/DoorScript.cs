@@ -76,7 +76,7 @@ public class DoorScript : MonoBehaviour
             unlocked = true;
             DoorOpens();
         }
-        else if(playerMovement.IsInteractPressed && inReach)
+       else if(playerMovement.IsInteractPressed && inReach)
         {
             doorLocked.SetActive(true);
             doorLocked.GetComponent<TMP_Text>().text = "Door Is Locked";
