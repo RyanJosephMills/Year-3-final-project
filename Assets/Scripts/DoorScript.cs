@@ -77,7 +77,6 @@ public class DoorScript : MonoBehaviour
             unlocked = true;
             DoorOpens();
             doorUnlocked.SetActive(true);
-            doorUnlocked.GetComponent<TMP_Text>().text = "Door Is Unlocked";
         }
         else
         {
@@ -88,7 +87,6 @@ public class DoorScript : MonoBehaviour
             unlocked = false;
             DoorCloses();
             doorLocked.SetActive(true);
-            doorLocked.GetComponent<TMP_Text>().text = "Door Is Locked";
         }
 
     }
