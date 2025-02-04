@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     public bool Sprinting;
     public bool Crouching;
     public bool IsMenuPressed;
+    public bool IsUnlockdoorPressed;
 
 
 
@@ -134,6 +135,9 @@ public class PlayerMovement : MonoBehaviour
         playerInputSystem.Main.Jump.canceled += OnJump;
         playerInputSystem.Main.Reload.performed += OnReload;
         playerInputSystem.Main.MenuOpenClose.performed += OnMenu;
+        playerInputSystem.Main.UnlockDoor.performed += OnDoorUnlocked;
+        playerInputSystem.Main.UnlockDoor.canceled += OnDoorUnlocked;
+
     }
 
     private void OnDisable()
@@ -155,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
         playerInputSystem.Main.Jump.canceled -= OnJump;
         playerInputSystem.Main.Reload.performed -= OnReload;
         playerInputSystem.Main.MenuOpenClose.performed -= OnMenu;
+        playerInputSystem.Main.UnlockDoor.performed -= OnDoorUnlocked;
+        playerInputSystem.Main.UnlockDoor.canceled -= OnDoorUnlocked;
     }
 
     private void OnMove(InputAction.CallbackContext action)
@@ -199,5 +205,9 @@ public class PlayerMovement : MonoBehaviour
     {
         IsMenuPressed = action.ReadValueAsButton();
     }
+    private void OnDoorUnlocked(InputAction.CallbackContext action)
+    {
+        IsUnlockdoorPressed = action.ReadValueAsButton();
 
+    }
 }

@@ -107,6 +107,15 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnlockDoor"",
+                    ""type"": ""Button"",
+                    ""id"": ""420bdb35-b56f-45e8-875e-5c8995b0fbbd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -351,6 +360,17 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d64891ed-a295-4675-99f6-d5c0f59166a9"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnlockDoor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -368,6 +388,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         m_Main_Flashlight = m_Main.FindAction("Flashlight", throwIfNotFound: true);
         m_Main_Reload = m_Main.FindAction("Reload", throwIfNotFound: true);
         m_Main_MenuOpenClose = m_Main.FindAction("MenuOpenClose", throwIfNotFound: true);
+        m_Main_UnlockDoor = m_Main.FindAction("UnlockDoor", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +459,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Flashlight;
     private readonly InputAction m_Main_Reload;
     private readonly InputAction m_Main_MenuOpenClose;
+    private readonly InputAction m_Main_UnlockDoor;
     public struct MainActions
     {
         private @PlayerInputSystem m_Wrapper;
@@ -451,6 +473,7 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_Main_Flashlight;
         public InputAction @Reload => m_Wrapper.m_Main_Reload;
         public InputAction @MenuOpenClose => m_Wrapper.m_Main_MenuOpenClose;
+        public InputAction @UnlockDoor => m_Wrapper.m_Main_UnlockDoor;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -487,6 +510,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MenuOpenClose.started += instance.OnMenuOpenClose;
             @MenuOpenClose.performed += instance.OnMenuOpenClose;
             @MenuOpenClose.canceled += instance.OnMenuOpenClose;
+            @UnlockDoor.started += instance.OnUnlockDoor;
+            @UnlockDoor.performed += instance.OnUnlockDoor;
+            @UnlockDoor.canceled += instance.OnUnlockDoor;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -518,6 +544,9 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
             @MenuOpenClose.started -= instance.OnMenuOpenClose;
             @MenuOpenClose.performed -= instance.OnMenuOpenClose;
             @MenuOpenClose.canceled -= instance.OnMenuOpenClose;
+            @UnlockDoor.started -= instance.OnUnlockDoor;
+            @UnlockDoor.performed -= instance.OnUnlockDoor;
+            @UnlockDoor.canceled -= instance.OnUnlockDoor;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -546,5 +575,6 @@ public partial class @PlayerInputSystem: IInputActionCollection2, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnMenuOpenClose(InputAction.CallbackContext context);
+        void OnUnlockDoor(InputAction.CallbackContext context);
     }
 }
