@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     PlayerMovement playerMovement;
+   
+
 
 
     private void Awake()
