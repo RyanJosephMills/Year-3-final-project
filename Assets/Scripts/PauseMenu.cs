@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     PlayerMovement playerMovement;
-   
+
 
 
 
@@ -29,11 +29,12 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
-                
+
             }
             else
             {
                 Pause();
+
             }
             playerMovement.IsMenuPressed = false;
         }
