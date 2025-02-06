@@ -896,7 +896,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -25.568405, y: 0, z: -23.538307, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -27077,7 +27077,7 @@ Transform:
   m_GameObject: {fileID: 1367695034}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -11.5, y: 1.14, z: -19.68}
+  m_LocalPosition: {x: -11.4999695, y: 1.1400146, z: -19.679998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43170,9 +43170,9 @@ SceneRoots:
   - {fileID: 1102101642}
   - {fileID: 1343100737}
   - {fileID: 744509625}
-  - {fileID: 1367695035}
   - {fileID: 684410755}
   - {fileID: 116358176}
+  - {fileID: 1367695035}
   - {fileID: 654230585}
   - {fileID: 875558279}
   - {fileID: 2014515582}
