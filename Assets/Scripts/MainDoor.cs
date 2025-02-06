@@ -59,7 +59,7 @@ public class MainDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (KeyINV && KeyINV2.activeInHierarchy)
+        if (KeyINV && KeyINV2 && KeyINV3 && KeyINV4 && KeyINV5 && KeyINV6 && KeyINV7.activeInHierarchy)
         {
             locked = false;
             hasKey = true;
