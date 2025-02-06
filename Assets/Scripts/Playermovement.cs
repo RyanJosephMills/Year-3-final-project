@@ -18,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public float defaultHeight = 2f;
     public float crouchHeight = 1f;
     public float crouchSpeed = 3f;
+    public GameObject PauseMenuUI;
+    public GameObject SettingMenuUi;
+    public GameObject ControlsMenuUI;
+    public GameObject OptionsMenuUi;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -49,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PauseMenuUI.SetActive(false);
+        SettingMenuUi.SetActive(false);
+        ControlsMenuUI.SetActive(false);
+        OptionsMenuUi.SetActive(false);
     }
 
     void Update()

@@ -11,7 +11,17 @@ public class PauseMenu : MonoBehaviour
 
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
+    public GameObject BatteryUI;
+    public GameObject BatteryHealthUI;
+    public GameObject SettingsUI;
+    public GameObject OptionsUI;
+    public GameObject ControlsUI;
     PlayerMovement playerMovement;
+
+    void Start()
+    {
+
+    }
 
 
 
@@ -42,15 +52,23 @@ public class PauseMenu : MonoBehaviour
    public void Resume()
     {
         PauseMenuUI.SetActive(false);
+        SettingsUI.SetActive(false);
+        ControlsUI.SetActive(false);
+        OptionsUI.SetActive(false);
+        BatteryUI.SetActive(true);
+        BatteryHealthUI.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
         playerMovement.canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
     void Pause()
     {
         PauseMenuUI.SetActive(true);
+        BatteryUI.SetActive(false);
+        BatteryHealthUI.SetActive(false);
         Time.timeScale = 0f;
         GameIsPaused = true;
         playerMovement.canMove = false;

@@ -11,6 +11,8 @@ TagManager:
   - PatrolPoint Room2
   - Door
   - Location
+  - Death
+  - Win
   layers:
   - Default
   - TransparentFX

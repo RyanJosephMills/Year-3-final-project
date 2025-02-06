@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+
 public class SettingsMenu : MonoBehaviour
 {
+    PlayerMovement playerMovement;
     Resolution[] resolutions;
 
+    private void Awake()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
     public Dropdown resolutionsDropdown;
 
     // Start is called before the first frame update
@@ -30,7 +36,7 @@ public class SettingsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void SetQuality(int qualityIndex)
     {
@@ -41,4 +47,5 @@ public class SettingsMenu : MonoBehaviour
     {
         Screen.fullScreen = isFullScreen;
     }
+
 }

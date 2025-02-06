@@ -1,49 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Win : MonoBehaviour
+public class DeathCode : MonoBehaviour
 {
-    public GameObject pickUpText;
-    public bool inReach;
     PlayerMovement playerMovement;
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
+    public bool inReach;
+
     // Start is called before the first frame update
     void Start()
     {
         inReach = false;
-        pickUpText.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove)
+        if (inReach)
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("Lose");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Win")
+        if (other.gameObject.tag == "Death")
         {
             inReach = true;
-            pickUpText.SetActive(true);
 
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Win")
+        if (other.gameObject.tag == "Death")
         {
             inReach = false;
-            pickUpText.SetActive(false);
         }
     }
 }
