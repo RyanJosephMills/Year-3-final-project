@@ -24,6 +24,8 @@ public class enemyAiPartrol : MonoBehaviour
     public bool Dooropen = true;
     private string currentRoomTag;
     private int currentRoomIndex = 0;
+    public GameObject destinationPrefab;
+    public GameObject currentDestination;
 
     NavMeshAgent agent;
 
@@ -67,7 +69,7 @@ public class enemyAiPartrol : MonoBehaviour
     {
         if (!walkpointSet) SearchForDes();
         if (walkpointSet) agent.SetDestination(desPoint);
-        if (Vector3.Distance(transform.position, desPoint) < 1) walkpointSet = false ;
+        //if (Vector3.Distance(transform.position, desPoint) < 1) walkpointSet = false ;
     }
 
     void SearchForDes()
@@ -77,6 +79,7 @@ public class enemyAiPartrol : MonoBehaviour
         desPoint = Rooms[currentRoomIndex][targetIndex].transform.position;
         walkpointSet = true;
 
+        currentDestination = Instantiate(destinationPrefab, desPoint, destinationPrefab.transform.rotation);
         /*float z = Random.Range(-range, range);
         float x = Random.Range(range, -range);
 
@@ -99,6 +102,15 @@ public class enemyAiPartrol : MonoBehaviour
             currentRoomIndex = 0;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Destination"))
+        {
+            walkpointSet = false;
+            Destroy(other.gameObject);
+        }
     }
 
 }
