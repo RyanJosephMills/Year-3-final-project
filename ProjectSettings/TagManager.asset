@@ -14,6 +14,7 @@ TagManager:
   - Death
   - Win
   - Destination
+  - AIReach
   layers:
   - Default
   - TransparentFX

@@ -138,7 +138,6 @@ public class PlayerMovement : MonoBehaviour
         playerInputSystem.Main.Crouch.performed += OnCrouch;
         playerInputSystem.Main.Crouch.canceled += OnCrouch;
         playerInputSystem.Main.Interact.performed += OnInteract;
-        playerInputSystem.Main.Interact.canceled += OnInteract;
         playerInputSystem.Main.Flashlight.performed += OnFlashlight;
         playerInputSystem.Main.Jump.performed += OnJump;
         playerInputSystem.Main.Jump.canceled += OnJump;
@@ -162,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
         playerInputSystem.Main.Crouch.performed -= OnCrouch;
         playerInputSystem.Main.Crouch.canceled -= OnCrouch;
         playerInputSystem.Main.Interact.performed -= OnInteract;
-        playerInputSystem.Main.Interact.canceled -= OnInteract;
         playerInputSystem.Main.Flashlight.performed -= OnFlashlight;
         playerInputSystem.Main.Jump.performed -= OnJump;
         playerInputSystem.Main.Jump.canceled -= OnJump;

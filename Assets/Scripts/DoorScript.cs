@@ -27,6 +27,12 @@ public class DoorScript : MonoBehaviour
     public bool unlocked;
     public bool locked;
     public bool hasKey;
+    public bool EnemyInReach;
+
+
+    public float doorTextTimer = 1;
+
+    public bool DoorIsOpen;
 
     void Start()
     {
@@ -34,6 +40,8 @@ public class DoorScript : MonoBehaviour
         unlocked = false;
         locked = true;
         hasKey = false;
+        EnemyInReach = false;
+        doorTextTimer = 1;
     }
 
     void OnTriggerEnter(Collider other)
@@ -42,6 +50,10 @@ public class DoorScript : MonoBehaviour
         {
             inReach = true;
             openText.SetActive(true);
+        }
+        if (other.gameObject.tag == "AIReach")
+        {
+            EnemyInReach = true;
         }
 
     }
@@ -54,56 +66,76 @@ public class DoorScript : MonoBehaviour
             doorLocked.SetActive(false);
             doorUnlocked.SetActive(false);
         }
+        if (other.gameObject.tag == "AIReach")
+        {
+            EnemyInReach = false;
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (KeyINV && KeyINV2.activeInHierarchy)
-        {
-            locked = false;
-            hasKey = true;
+        hasKey = (KeyINV && KeyINV2.activeInHierarchy);
+        //if (playerMovement.IsUnlockdoorPressed && inReach && playerMovement.canMove && hasKey)
+        //{
+        //    unlocked = true;
+        //    doorUnlocked.SetActive(true);
+        //}
 
-        }
-        else
-        {
-            hasKey = false;
+        //if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey && unlocked)
+        //{
+        //    DoorOpens();
+        //}
+        //else
+        //{
+        //    DoorCloses();
+        //}
 
-        }
-       
-        if (playerMovement.IsUnlockdoorPressed && inReach && playerMovement.canMove && hasKey)
+        //if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
+        //{
+        //    unlocked = false;
+        //    DoorCloses();
+        //    doorLocked.SetActive(true);
+        //}
+
+        if (playerMovement.IsInteractPressed)
         {
-            unlocked = true;
-            doorUnlocked.SetActive(true);
+            DoorIsOpen = unlocked ? !DoorIsOpen : false;
+            unlocked = hasKey;
+            
+            CheckDoor();
+            doorTextTimer = 0;
         }
-       
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey && unlocked)
+        else if (EnemyInReach)
         {
-            DoorOpens();
+            DoorIsOpen = true;
+            CheckDoor();
         }
-        else
-        {
-            DoorCloses();
-        }
-       
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
-        {
-            unlocked = false;
-            DoorCloses();
-            doorLocked.SetActive(true);
-        }
+        playerMovement.IsInteractPressed = false;
+        DoorTextTimer();
 
     }
-    void DoorOpens()
+    public void CheckDoor()
     {
-        Door.SetBool("Open", true);
-        Door.SetBool("Closed", false);
-    }    
-    void DoorCloses()
+        Door.SetBool("Open", DoorIsOpen);
+    }
+
+
+    public void DoorTextTimer()
     {
-        Door.SetBool("Open", false);
-        Door.SetBool("Closed", true);
+        if (doorTextTimer != 1)
+        {
+            doorLocked.SetActive(!unlocked);
+            doorUnlocked.SetActive(unlocked);
+            doorTextTimer+=Time.deltaTime;
+            if (doorTextTimer > 1)
+            {
+                doorLocked.SetActive(false);
+                doorUnlocked.SetActive(false);
+                doorTextTimer = 1;
+            }
+        }
     }
 
 }
