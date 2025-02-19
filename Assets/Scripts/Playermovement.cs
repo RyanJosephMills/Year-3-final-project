@@ -169,7 +169,10 @@ public class PlayerMovement : MonoBehaviour
         playerInputSystem.Main.UnlockDoor.performed -= OnDoorUnlocked;
         playerInputSystem.Main.UnlockDoor.canceled -= OnDoorUnlocked;
     }
-
+    private void LateUpdate()
+    {
+        IsInteractPressed = false;
+    }
     private void OnMove(InputAction.CallbackContext action)
     {
         MoveInput = action.ReadValue<Vector2>();

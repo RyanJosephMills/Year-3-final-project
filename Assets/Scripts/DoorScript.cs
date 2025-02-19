@@ -112,7 +112,6 @@ public class DoorScript : MonoBehaviour
             DoorIsOpen = true;
             CheckDoor();
         }
-        playerMovement.IsInteractPressed = false;
         DoorTextTimer();
 
     }
