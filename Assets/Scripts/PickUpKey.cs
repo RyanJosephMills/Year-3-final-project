@@ -32,6 +32,7 @@ public class PickUpKey : MonoBehaviour
         {
             inReach = true;
             pickUpText.SetActive(true);
+            Debug.Log("Collider");
             
         }
     }
@@ -41,6 +42,7 @@ public class PickUpKey : MonoBehaviour
         {
             inReach = false;
             pickUpText.SetActive(false);
+            Debug.Log("NoCollider");
         }
     }
 

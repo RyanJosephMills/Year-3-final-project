@@ -99,7 +99,7 @@ public class DoorScript : MonoBehaviour
         //    doorLocked.SetActive(true);
         //}
 
-        if (playerMovement.IsInteractPressed)
+        if (playerMovement.IsInteractPressed && inReach)
         {
             DoorIsOpen = unlocked ? !DoorIsOpen : false;
             unlocked = hasKey;

@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4157663174796259911}
   - component: {fileID: 2594543513522085124}
   m_Layer: 0
-  m_Name: Ceiling lamp smaller
+  m_Name: Ceiling lamp smallerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
