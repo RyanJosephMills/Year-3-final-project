@@ -8,7 +8,9 @@ public class Flashlight : MonoBehaviour
     // Video of the code https://www.youtube.com/watch?v=xaJsStZp0kU&list=PLlcgaDpDEvw05IgKGZo9FYA8Fo38RtAqH&t=83s
 
     public Light light;
+
     public TMP_Text text;
+
     PlayerMovement playerMovement;
 
     public TMP_Text batteryText;
@@ -18,6 +20,8 @@ public class Flashlight : MonoBehaviour
     public float batteries = 0;
 
     public bool on;
+
+    public float BatteryDrop;
 
 
 
@@ -44,7 +48,7 @@ public class Flashlight : MonoBehaviour
 
         if (on)
         {
-            lifetime -= 1 * Time.deltaTime;
+            lifetime -= BatteryDrop * Time.deltaTime;
         }
         if(lifetime <= 0)
         {
@@ -61,9 +65,9 @@ public class Flashlight : MonoBehaviour
             if (lifetime != 100) 
             {
                 batteries -= 1;
-                lifetime += 50;
-            }
+                lifetime += 25;
 
+            }
         }
         if (playerMovement.IsReloadPressed && batteries == 0)
         {

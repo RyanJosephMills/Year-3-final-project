@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 
 // This Code was from a tutorial on Youtube however I have no idea where the video has gone 
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject SettingMenuUi;
     public GameObject ControlsMenuUI;
     public GameObject OptionsMenuUi;
+    public TMP_Text StaminaUI;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -44,12 +46,22 @@ public class PlayerMovement : MonoBehaviour
     public bool Crouching;
     public bool IsMenuPressed;
     public bool IsUnlockdoorPressed;
+    public float Stamina;
+    public float MaxStamina = 100;
+    public float StaminaDrop;
+    public float StaminaIncrease;
+    private bool CanSprint = true;
+
 
 
 
 
     void Start()
     {
+
+        Stamina = MaxStamina;
+        StaminaUI.text = $"Stamina: {Stamina}";
+        StaminaUI.color = Color.green;
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             ApplyMovement();
             CheckCrouch();
             ApplyCamera();
+            
         }
     }
 
@@ -76,16 +89,49 @@ public class PlayerMovement : MonoBehaviour
         float moveDirectionY = moveDirection.y;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        float curSpeedX = (Sprinting ? runSpeed : walkSpeed) * MoveInput.y;
-        float curSpeedY = (Sprinting ? runSpeed : walkSpeed) * MoveInput.x;
+        float curSpeedX = (Sprinting && Stamina > 0 && CanSprint ? runSpeed : walkSpeed) * MoveInput.y;
+        float curSpeedY = (Sprinting && Stamina > 0 && CanSprint ? runSpeed : walkSpeed) * MoveInput.x;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
         if (!characterController.isGrounded)
         {
-            Debug.Log("Bruh");
             moveDirectionY -= gravity * Time.deltaTime;
         }
         moveDirection.y = moveDirectionY;
         characterController.Move(moveDirection * Time.deltaTime);
+
+        if (Sprinting)
+        {
+            Stamina -= StaminaDrop * Time.deltaTime;
+            if (Stamina <= 0)
+            {
+                StaminaUI.color = Color.red;
+                Stamina = 0;
+                CanSprint = false;
+                StartCoroutine(StaminaCoolDown());
+            }
+
+            StaminaUI.text = Stamina > 0 ? $"Stamina : {Mathf.Floor(Stamina)}" : $"Stamina : 0";
+        }
+
+        if (!Sprinting && Stamina >= 1)
+        {
+            Stamina += StaminaIncrease * Time.deltaTime;
+            if(Stamina >= 50)
+            {
+                Stamina = 50;
+                CanSprint = true;
+            }
+            StaminaUI.text = Stamina < 50 ? $"Stamina : {Mathf.Floor(Stamina)}" : $"Stamina : 50";
+        }
+    }
+
+    IEnumerator StaminaCoolDown()
+    {
+        yield return new WaitForSeconds(5f);
+        CanSprint = true;
+        Stamina = MaxStamina;
+        StaminaUI.text = $"Stamina : {Stamina}";
+        StaminaUI.color = Color.green;
     }
 
     private void CheckCrouch()

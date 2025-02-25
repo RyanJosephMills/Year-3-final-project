@@ -17,7 +17,13 @@ public class MainDoor : MonoBehaviour
     public GameObject KeyINV5;
     public GameObject KeyINV6;
     public GameObject KeyINV7;
+
+    public GameObject[] KeyInv;
+
+    public GameObject doorLocked;
+    public GameObject doorUnlocked;
     PlayerMovement playerMovement;
+
 
     private void Awake()
     {
@@ -28,6 +34,26 @@ public class MainDoor : MonoBehaviour
     public bool unlocked;
     public bool locked;
     public bool hasKey;
+    public bool EnemyInReach;
+
+
+    public float doorTextTimer = 1;
+
+    public bool DoorIsOpen;
+
+
+    private void CheckKeys()
+    {
+        bool hasAllKeys = true;
+        foreach(GameObject key in KeyInv)
+        {
+            //if he hasnt got this key set hasAllKeys to false;
+        }
+        if (hasAllKeys)
+        {
+            //opendoor
+        }
+    }
 
     void Start()
     {
@@ -35,6 +61,8 @@ public class MainDoor : MonoBehaviour
         unlocked = false;
         locked = true;
         hasKey = false;
+        EnemyInReach = false;
+        doorTextTimer = 1;
     }
 
     void OnTriggerEnter(Collider other)
@@ -44,6 +72,10 @@ public class MainDoor : MonoBehaviour
             inReach = true;
             openText.SetActive(true);
         }
+        if (other.gameObject.tag == "AIReach")
+        {
+            EnemyInReach = true;
+        }
 
     }
     void OnTriggerExit(Collider other)
@@ -52,6 +84,12 @@ public class MainDoor : MonoBehaviour
         {
             inReach = false;
             openText.SetActive(false);
+            doorLocked.SetActive(false);
+            doorUnlocked.SetActive(false);
+        }
+        if (other.gameObject.tag == "AIReach")
+        {
+            EnemyInReach = false;
         }
 
     }
@@ -59,34 +97,45 @@ public class MainDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (KeyINV && KeyINV2 && KeyINV3 && KeyINV4 && KeyINV5 && KeyINV6 && KeyINV7.activeInHierarchy)
-        {
-            locked = false;
-            hasKey = true;
-        }
-        else
-        {
-            hasKey = false;
-        }
+        hasKey = (KeyINV && KeyINV2.activeInHierarchy);
 
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey)
+        if (playerMovement.IsInteractPressed && inReach)
         {
-            unlocked = true;
-            DoorOpens();
+            DoorIsOpen = unlocked ? !DoorIsOpen : false;
+            unlocked = hasKey;
+
+            CheckDoor();
+            doorTextTimer = 0;
         }
-        else
+        else if (EnemyInReach)
         {
-            DoorCloses();
+            DoorIsOpen = true;
+            CheckDoor();
+        }
+        DoorTextTimer();
+
+    }
+    public void CheckDoor()
+    {
+        Door.SetBool("Open", DoorIsOpen);
+    }
+
+
+    public void DoorTextTimer()
+    {
+        if (doorTextTimer != 1)
+        {
+            doorLocked.SetActive(!unlocked);
+            doorUnlocked.SetActive(unlocked);
+            doorTextTimer += Time.deltaTime;
+            if (doorTextTimer > 1)
+            {
+                doorLocked.SetActive(false);
+                doorUnlocked.SetActive(false);
+                doorTextTimer = 1;
+            }
         }
     }
-    void DoorOpens()
-    {
-        Door.SetBool("Open", true);
-        Door.SetBool("Closed", false);
-    }    
-    void DoorCloses()
-    {
-        Door.SetBool("Open", false);
-        Door.SetBool("Closed", true);
-    }
+
 }
+

@@ -77,35 +77,36 @@ public class DoorScript : MonoBehaviour
     void Update()
     {
         hasKey = (KeyINV && KeyINV2.activeInHierarchy);
-        //if (playerMovement.IsUnlockdoorPressed && inReach && playerMovement.canMove && hasKey)
-        //{
-        //    unlocked = true;
-        //    doorUnlocked.SetActive(true);
-        //}
+        /*if (playerMovement.IsUnlockdoorPressed && inReach && playerMovement.canMove && hasKey)
+        {
+            unlocked = true;
+            doorUnlocked.SetActive(true);
+        }
 
-        //if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey && unlocked)
-        //{
-        //    DoorOpens();
-        //}
-        //else
-        //{
-        //    DoorCloses();
-        //}
+        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey && unlocked)
+        {
+            DoorOpens();
+        }
+        else
+        {
+            DoorCloses();
+        }
 
-        //if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
-        //{
-        //    unlocked = false;
-        //    DoorCloses();
-        //    doorLocked.SetActive(true);
-        //}
+        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
+        {
+            unlocked = false;
+            DoorCloses();
+            doorLocked.SetActive(true);
+        }*/
 
         if (playerMovement.IsInteractPressed && inReach)
         {
             DoorIsOpen = unlocked ? !DoorIsOpen : false;
+            doorTextTimer = unlocked ? 1.3f : 0f;
             unlocked = hasKey;
             
             CheckDoor();
-            doorTextTimer = 0;
+            
         }
         else if (EnemyInReach)
         {
@@ -123,7 +124,7 @@ public class DoorScript : MonoBehaviour
 
     public void DoorTextTimer()
     {
-        if (doorTextTimer != 1)
+        if (doorTextTimer < 1.2)
         {
             doorLocked.SetActive(!unlocked);
             doorUnlocked.SetActive(unlocked);
@@ -132,7 +133,7 @@ public class DoorScript : MonoBehaviour
             {
                 doorLocked.SetActive(false);
                 doorUnlocked.SetActive(false);
-                doorTextTimer = 1;
+                doorTextTimer = 1.3f;
             }
         }
     }
