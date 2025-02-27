@@ -10,6 +10,7 @@ public class PickUpKey : MonoBehaviour
     public GameObject keyOB;
     public GameObject invOB;
     public GameObject pickUpText;
+    public GameObject EnemyAI;
     PlayerMovement playerMovement;
 
     private void Awake()
@@ -54,6 +55,7 @@ public class PickUpKey : MonoBehaviour
             keyOB.SetActive(false);
             invOB.SetActive(true);
             pickUpText.SetActive(false);
+            EnemyAI.SetActive(true);
         }   
     }
 }
