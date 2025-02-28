@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject ControlsMenuUI;
     public GameObject OptionsMenuUi;
     public TMP_Text StaminaUI;
+    public GameObject StaminaActive;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -70,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         SettingMenuUi.SetActive(false);
         ControlsMenuUI.SetActive(false);
         OptionsMenuUi.SetActive(false);
+        StaminaActive.SetActive(false);
     }
 
     void Update()
@@ -101,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Sprinting)
         {
+            StaminaActive.SetActive(true);
             Stamina -= StaminaDrop * Time.deltaTime;
             if (Stamina <= 0)
             {
@@ -120,9 +123,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Stamina = 50;
                 CanSprint = true;
+                StaminaActive.SetActive(false);
             }
             StaminaUI.text = Stamina < 50 ? $"Stamina : {Mathf.Floor(Stamina)}" : $"Stamina : 50";
         }
+
     }
 
     IEnumerator StaminaCoolDown()

@@ -9,7 +9,7 @@ public class Flashlight : MonoBehaviour
 
     public Light light;
 
-    public TMP_Text text;
+    public TMP_Text FlashlightLifetime;
 
     PlayerMovement playerMovement;
 
@@ -23,13 +23,18 @@ public class Flashlight : MonoBehaviour
 
     public float BatteryDrop;
 
+    public float IntensityDrop;
+
+
 
 
     void Start()
     {
-        text.text = "Flashlight : " + lifetime + "%";
+        FlashlightLifetime.text = "Flashlight : " + lifetime + "%";
         light = GetComponent<Light>();
         light.enabled = false;
+        light.intensity = 25;
+
     }
     private void Awake()
     {
@@ -39,7 +44,7 @@ public class Flashlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = lifetime.ToString("0") + "%";
+        FlashlightLifetime.text = lifetime.ToString("0") + "%";
         batteryText.text = batteries.ToString();
 
         light.enabled = playerMovement.IsFlashlightPressed;
@@ -49,15 +54,18 @@ public class Flashlight : MonoBehaviour
         if (on)
         {
             lifetime -= BatteryDrop * Time.deltaTime;
+            light.intensity -= IntensityDrop * Time.deltaTime;
         }
         if(lifetime <= 0)
         {
             light.enabled = false;
             lifetime = 0;
+            light.intensity = 0;
         }
         if (lifetime >= 100)
         {
             lifetime = 100;
+            light.intensity = 25;
         }
         if (playerMovement.IsReloadPressed && batteries >= 1 && playerMovement.canMove)
         {
@@ -66,6 +74,7 @@ public class Flashlight : MonoBehaviour
             {
                 batteries -= 1;
                 lifetime += 25;
+                light.intensity += 25;
 
             }
         }
