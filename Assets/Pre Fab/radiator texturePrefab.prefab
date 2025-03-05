@@ -64,9 +64,13 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 098ef3b140085ef4a950b4e3c445f927, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5186e4fa4479532409d8f46e39bfae95, type: 2}
     - target: {fileID: 919132149155446097, guid: 098ef3b140085ef4a950b4e3c445f927, type: 3}
       propertyPath: m_Name
-      value: radiator texture
+      value: radiator texturePrefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

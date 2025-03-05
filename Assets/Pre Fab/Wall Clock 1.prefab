@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ac9e938e81d78e84bb446bf82c628215, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 77ed9556b5be05545b16980ca39a7bf2, type: 2}
     - target: {fileID: 919132149155446097, guid: ac9e938e81d78e84bb446bf82c628215, type: 3}
       propertyPath: m_Name
       value: Wall Clock 1
