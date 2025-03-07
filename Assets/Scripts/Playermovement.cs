@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             CheckJump();
             ApplyMovement();
-            CheckCrouch();
+            //CheckCrouch();
             ApplyCamera();
             
         }
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         StaminaUI.color = Color.green;
     }
 
-    private void CheckCrouch()
+  /*  private void CheckCrouch()
     {
         Debug.Log(Crouching);
         if (Crouching)
@@ -155,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
             walkSpeed = 2f;
             runSpeed = 4f;
         }
-    }
+    }*/
 
     private void CheckJump()
     {

@@ -15,6 +15,7 @@ TagManager:
   - Win
   - Destination
   - AIReach
+  - PlayAudioTrigger
   layers:
   - Default
   - TransparentFX
