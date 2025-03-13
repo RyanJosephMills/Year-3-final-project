@@ -46637,7 +46637,7 @@ MonoBehaviour:
   FlashlightLifetime: {fileID: 1046728583}
   batteryText: {fileID: 1432422921}
   lifetime: 100
-  batteries: 10
+  batteries: 20
   on: 0
   BatteryDrop: 2
   IntensityDrop: 0.5
