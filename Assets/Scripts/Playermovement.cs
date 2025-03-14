@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public TMP_Text StaminaUI;
     public GameObject StaminaActive;
 
+
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
     private CharacterController characterController;

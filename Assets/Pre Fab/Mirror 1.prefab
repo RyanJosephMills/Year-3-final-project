@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: dcf84c338eaf50941be94f960e05b08a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a91f32bdc77f05b4cade1c82be51b663, type: 2}
     - target: {fileID: 919132149155446097, guid: dcf84c338eaf50941be94f960e05b08a, type: 3}
       propertyPath: m_Name
       value: Mirror 1

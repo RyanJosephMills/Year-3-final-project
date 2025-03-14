@@ -80,15 +80,6 @@ public class enemyAiPartrol : MonoBehaviour
         walkpointSet = true;
 
         currentDestination = Instantiate(destinationPrefab, desPoint, destinationPrefab.transform.rotation);
-        /*float z = Random.Range(-range, range);
-        float x = Random.Range(range, -range);
-
-        desPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-
-        if (Physics.Raycast(desPoint, Vector3.down, groundLayer))
-        {
-            walkpointSet = true;
-        }*/
     }
     public void RoomChange()
     {

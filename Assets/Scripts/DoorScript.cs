@@ -53,7 +53,9 @@ public class DoorScript : MonoBehaviour
         }
         if (other.gameObject.tag == "AIReach")
         {
+            Debug.Log("calling");
             EnemyInReach = true;
+            DoorOpen();
         }
 
     }
@@ -68,7 +70,9 @@ public class DoorScript : MonoBehaviour
         }
         if (other.gameObject.tag == "AIReach")
         {
+            Debug.Log("not calling");
             EnemyInReach = false;
+            DoorClosed();
         }
 
     }
@@ -77,27 +81,6 @@ public class DoorScript : MonoBehaviour
     void Update()
     {
         hasKey = (KeyINV && KeyINV2.activeInHierarchy);
-        /*if (playerMovement.IsUnlockdoorPressed && inReach && playerMovement.canMove && hasKey)
-        {
-            unlocked = true;
-            doorUnlocked.SetActive(true);
-        }
-
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && hasKey && unlocked)
-        {
-            DoorOpens();
-        }
-        else
-        {
-            DoorCloses();
-        }
-
-        if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove && !hasKey)
-        {
-            unlocked = false;
-            DoorCloses();
-            doorLocked.SetActive(true);
-        }*/
 
         if (playerMovement.IsInteractPressed && inReach)
         {
@@ -136,6 +119,15 @@ public class DoorScript : MonoBehaviour
                 doorTextTimer = 1.3f;
             }
         }
+    }
+
+    void DoorOpen()
+    {
+        Door.SetBool("Open", true);
+    }
+    void DoorClosed()
+    {
+        Door.SetBool("Open", false);
     }
 
 }

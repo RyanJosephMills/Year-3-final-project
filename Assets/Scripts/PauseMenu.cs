@@ -17,6 +17,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject OptionsUI;
     public GameObject ControlsUI;
     public GameObject StaminaUI;
+    public GameObject ObjectiveText;
+    public AudioSource GameAudio;
     PlayerMovement playerMovement;
 
     void Start()
@@ -59,6 +61,8 @@ public class PauseMenu : MonoBehaviour
         BatteryUI.SetActive(true);
         BatteryHealthUI.SetActive(true);
         StaminaUI.SetActive(true);
+        ObjectiveText.SetActive(true);
+        GameAudio.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
         playerMovement.canMove = true;
@@ -72,6 +76,8 @@ public class PauseMenu : MonoBehaviour
         BatteryUI.SetActive(false);
         BatteryHealthUI.SetActive(false);
         StaminaUI.SetActive(false);
+        ObjectiveText.SetActive(false);
+        GameAudio.Pause();
         Time.timeScale = 0f;
         GameIsPaused = true;
         playerMovement.canMove = false;
