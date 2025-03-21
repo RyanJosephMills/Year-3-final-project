@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f5240fda5bec7a1459b00f0d10fefe7c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ad20b2575df8424f97140caf81f13b5, type: 2}
     - target: {fileID: 919132149155446097, guid: f5240fda5bec7a1459b00f0d10fefe7c, type: 3}
       propertyPath: m_Name
       value: NewGrandfatherclock

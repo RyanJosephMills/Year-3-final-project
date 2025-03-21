@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ReadNote : MonoBehaviour
@@ -9,6 +10,7 @@ public class ReadNote : MonoBehaviour
     public GameObject hud;
     public GameObject keyOB;
     public GameObject invOB;
+    private GameObject NotePickup;
     PlayerMovement playerMovement;
     public static bool GameIsPaused = false;
 
@@ -27,7 +29,6 @@ public class ReadNote : MonoBehaviour
         hud.SetActive(true);
         pickUpText.SetActive(false);
         invOB.SetActive(false);
-
         inReach = false;
     }
     void OnTriggerEnter(Collider other)
@@ -51,6 +52,8 @@ public class ReadNote : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove)
         {
             noteUI.SetActive(true);
@@ -63,7 +66,8 @@ public class ReadNote : MonoBehaviour
             invOB.SetActive(true);
 
         }
-    }        public void ExitButton()
+    }        
+    public void ExitButton()
     {
         noteUI.SetActive(false);
         hud.SetActive(true);
@@ -73,6 +77,5 @@ public class ReadNote : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         pickUpText.SetActive(false);
     }
-        
-
+    
 }

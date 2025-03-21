@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,12 +13,15 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     public GameObject BatteryUI;
+    public GameObject NoteUI;
     public GameObject BatteryHealthUI;
     public GameObject SettingsUI;
     public GameObject OptionsUI;
     public GameObject ControlsUI;
     public GameObject StaminaUI;
     public GameObject ObjectiveText;
+    public float Notes = 0;
+    public TMP_Text NoteText;
     public AudioSource GameAudio;
     PlayerMovement playerMovement;
 
@@ -37,6 +41,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        NoteText.text = Notes.ToString();
         if (playerMovement.IsMenuPressed)
         {
             if (GameIsPaused)
@@ -61,7 +66,7 @@ public class PauseMenu : MonoBehaviour
         BatteryUI.SetActive(true);
         BatteryHealthUI.SetActive(true);
         StaminaUI.SetActive(true);
-        ObjectiveText.SetActive(true);
+        ObjectiveText.SetActive(false);
         GameAudio.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -76,7 +81,7 @@ public class PauseMenu : MonoBehaviour
         BatteryUI.SetActive(false);
         BatteryHealthUI.SetActive(false);
         StaminaUI.SetActive(false);
-        ObjectiveText.SetActive(false);
+        ObjectiveText.SetActive(true);
         GameAudio.Pause();
         Time.timeScale = 0f;
         GameIsPaused = true;

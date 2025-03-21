@@ -25,6 +25,7 @@ public class Flashlight : MonoBehaviour
 
     public float IntensityDrop;
 
+    public bool HasFlashlight = false;
 
 
 
@@ -50,13 +51,22 @@ public class Flashlight : MonoBehaviour
         light.enabled = playerMovement.IsFlashlightPressed;
         on = playerMovement.IsFlashlightPressed;
 
+        if (HasFlashlight)
+        {
+            TriggerFlashlightVariables();
+        }
+        
+    }
 
+
+    private void TriggerFlashlightVariables()
+    {
         if (on)
         {
             lifetime -= BatteryDrop * Time.deltaTime;
             light.intensity -= IntensityDrop * Time.deltaTime;
         }
-        if(lifetime <= 0)
+        if (lifetime <= 0)
         {
             light.enabled = false;
             lifetime = 0;
@@ -70,7 +80,7 @@ public class Flashlight : MonoBehaviour
         if (playerMovement.IsReloadPressed && batteries >= 1 && playerMovement.canMove)
         {
             playerMovement.IsReloadPressed = false;
-            if (lifetime != 100) 
+            if (lifetime != 100)
             {
                 batteries -= 1;
                 lifetime += 25;

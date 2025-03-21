@@ -55,12 +55,19 @@ public class PlayerMovement : MonoBehaviour
     private bool CanSprint = true;
 
 
+    Flashlight flashlightScript;
+
+
+    private void Awake()
+    {
+        flashlightScript = FindObjectOfType<Flashlight>();
+    }
 
 
 
     void Start()
     {
-
+        
         Stamina = MaxStamina;
         StaminaUI.text = $"Stamina: {Stamina}";
         StaminaUI.color = Color.green;
@@ -250,7 +257,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnFlashlight(InputAction.CallbackContext action)
     {
-        IsFlashlightPressed = !IsFlashlightPressed;
+        if (flashlightScript.HasFlashlight)
+        {
+            IsFlashlightPressed = !IsFlashlightPressed;
+        }
     }
 
     private void OnJump(InputAction.CallbackContext action)
