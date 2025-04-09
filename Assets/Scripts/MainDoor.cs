@@ -63,6 +63,7 @@ public class MainDoor : MonoBehaviour
         hasKey = false;
         EnemyInReach = false;
         doorTextTimer = 1;
+
     }
 
     void OnTriggerEnter(Collider other)

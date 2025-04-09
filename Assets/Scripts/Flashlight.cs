@@ -27,6 +27,12 @@ public class Flashlight : MonoBehaviour
 
     public bool HasFlashlight = false;
 
+    public GameObject battery;
+    public GameObject battery1;
+    public GameObject battery2;
+    public GameObject battery3;
+    public GameObject battery4;
+
 
 
     void Start()
@@ -35,6 +41,12 @@ public class Flashlight : MonoBehaviour
         light = GetComponent<Light>();
         light.enabled = false;
         light.intensity = 25;
+        battery.SetActive(true);
+        battery1.SetActive(false);
+        battery2.SetActive(false);
+        battery3.SetActive(false);
+        battery4.SetActive(false);
+
 
     }
     private void Awake()
@@ -87,6 +99,30 @@ public class Flashlight : MonoBehaviour
                 light.intensity += 25;
 
             }
+        }
+        if (lifetime == 100)
+        {
+            battery.SetActive(true);
+        }
+        if (lifetime <= 75)
+        {
+            battery.SetActive(false);
+            battery1.SetActive(true);
+        }
+        if (lifetime <= 50)
+        {
+            battery1.SetActive(false);
+            battery2.SetActive(true);
+        }
+        if(lifetime <= 25)
+        {
+            battery2.SetActive(false);
+            battery3.SetActive(true);
+        }
+        if (lifetime <= 0)
+        {
+            battery3.SetActive(false);
+            battery4.SetActive(true);
         }
         if (playerMovement.IsReloadPressed && batteries == 0)
         {

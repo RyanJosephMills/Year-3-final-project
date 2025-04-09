@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PauseMenu : MonoBehaviour
 
@@ -13,35 +14,40 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     public GameObject BatteryUI;
+    public GameObject BatteryLife;
     public GameObject NoteUI;
-    public GameObject BatteryHealthUI;
     public GameObject SettingsUI;
     public GameObject OptionsUI;
     public GameObject ControlsUI;
     public GameObject StaminaUI;
     public GameObject ObjectiveText;
-    public float Notes = 0;
-    public TMP_Text NoteText;
+    public GameObject FlashLightObjectiveText;
+    public GameObject CameraUI;
+    public GameObject NoteNewUi;
+    public GameObject imageObject;
+    public GameObject OpeningObjective;
     public AudioSource GameAudio;
     PlayerMovement playerMovement;
+    public GameObject Line;
+    Flashlight Player;
+    public float Note = 0;
+    public TMP_Text NoteText;
 
     void Start()
     {
 
     }
-
-
-
-
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+
+        Player = FindAnyObjectByType<Flashlight>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        NoteText.text = Notes.ToString();
+        NoteText.text = Note.ToString();
         if (playerMovement.IsMenuPressed)
         {
             if (GameIsPaused)
@@ -63,10 +69,10 @@ public class PauseMenu : MonoBehaviour
         SettingsUI.SetActive(false);
         ControlsUI.SetActive(false);
         OptionsUI.SetActive(false);
-        BatteryUI.SetActive(true);
-        BatteryHealthUI.SetActive(true);
+        CameraUI.SetActive(true);
         StaminaUI.SetActive(true);
         ObjectiveText.SetActive(false);
+        FlashLightObjectiveText.SetActive(false);
         GameAudio.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -78,10 +84,25 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         PauseMenuUI.SetActive(true);
-        BatteryUI.SetActive(false);
-        BatteryHealthUI.SetActive(false);
+        CameraUI.SetActive(false);
         StaminaUI.SetActive(false);
-        ObjectiveText.SetActive(true);
+        imageObject.SetActive(false);
+        OpeningObjective.SetActive(false);
+
+        if (!Player.HasFlashlight)
+        {
+            FlashLightObjectiveText.SetActive(true);
+            ObjectiveText.SetActive(false);
+            NoteNewUi.SetActive(false);
+            Line.SetActive(false);
+        }
+        else if (Player.HasFlashlight)
+        {
+            Line.SetActive(true);
+            ObjectiveText.SetActive(true);
+            NoteNewUi.SetActive(true);
+            FlashLightObjectiveText.SetActive(true);
+        }
         GameAudio.Pause();
         Time.timeScale = 0f;
         GameIsPaused = true;
