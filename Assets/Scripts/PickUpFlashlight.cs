@@ -16,6 +16,7 @@ public class PickUpFlashlight : MonoBehaviour
     public GameObject pickUpText;
     PlayerMovement playerMovement;
     public GameObject battery1;
+    public GameObject batteryText;
     public GameObject ItemHolder;
     public GameObject imageObject;
     public float displayTime = 3f;
@@ -30,6 +31,7 @@ public class PickUpFlashlight : MonoBehaviour
         FlashlightLight.SetActive(false);
         FlashlightObject.SetActive(false);
         Batteries.SetActive(false);
+        batteryText.SetActive(false);
         battery1.SetActive(false);
         ItemHolder.SetActive(false);
         inReach = false;
@@ -50,6 +52,7 @@ public class PickUpFlashlight : MonoBehaviour
             FindObjectOfType<Flashlight>().HasFlashlight = true;
             ItemHolder.SetActive(true);
             imageObject.SetActive(true);
+            batteryText?.SetActive(true);
         }
     }
     void OnTriggerEnter(Collider other)
