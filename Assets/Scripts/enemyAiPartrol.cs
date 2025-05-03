@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms;
@@ -26,6 +27,8 @@ public class enemyAiPartrol : MonoBehaviour
     private int currentRoomIndex = 0;
     public GameObject destinationPrefab;
     public GameObject currentDestination;
+    public Animator EnemyAIAnimation;
+    public AudioSource ChaseMusic;
 
     NavMeshAgent agent;
 
@@ -46,6 +49,7 @@ public class enemyAiPartrol : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         Player = GameObject.Find("Player");
         Rooms = new List<List<PatrolPoint>>();
+        EnemyAIAnimation.SetBool("Moving", true);
         Rooms.Add(Room1);
         Rooms.Add(Room2);
     }
@@ -58,6 +62,15 @@ public class enemyAiPartrol : MonoBehaviour
 
         if(!playerInSight)Patrol();
         if (playerInSight) Chase();
+
+     /*   if (playerInSight)
+        {
+            ChaseMusic.Play();
+        }
+        else
+        {
+            ChaseMusic.Pause();
+        }*/
     }
 
     void Chase()

@@ -17,6 +17,7 @@ TagManager:
   - AIReach
   - PlayAudioTrigger
   - Note Pickup
+  - Music
   layers:
   - Default
   - TransparentFX
