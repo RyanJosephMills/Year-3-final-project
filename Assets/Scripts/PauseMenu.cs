@@ -28,6 +28,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject OpeningObjective;
     public GameObject FinalObjective;
     public AudioSource GameAudio;
+    public AudioSource Wind;
+    public AudioSource FootSteps;
+    public AudioSource CreepyMusic;
     PlayerMovement playerMovement;
     MainDoor mainDoor;
     public GameObject Line;
@@ -83,6 +86,8 @@ public class PauseMenu : MonoBehaviour
         ObjectiveText.SetActive(false);
         FlashLightObjectiveText.SetActive(false);
         GameAudio.Play();
+        Wind.Play();
+        CreepyMusic.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
         playerMovement.canMove = true;
@@ -130,6 +135,9 @@ public class PauseMenu : MonoBehaviour
         }
 
         GameAudio.Pause();
+        Wind.Pause();
+        FootSteps.Pause();
+        CreepyMusic.Pause();
         Time.timeScale = 0f;
         GameIsPaused = true;
         playerMovement.canMove = false;

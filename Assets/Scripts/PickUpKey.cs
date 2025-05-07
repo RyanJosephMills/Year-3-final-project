@@ -12,6 +12,7 @@ public class PickUpKey : MonoBehaviour
     public GameObject pickUpText;
     public GameObject EnemyAI;
     PlayerMovement playerMovement;
+    public AudioSource KeysAudio;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class PickUpKey : MonoBehaviour
         inReach = false;
         pickUpText.SetActive(false);
         invOB.SetActive(false);
+        KeysAudio.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -56,6 +58,11 @@ public class PickUpKey : MonoBehaviour
             invOB.SetActive(true);
             pickUpText.SetActive(false);
             EnemyAI.SetActive(true);
-        }   
+            KeysAudio.enabled = true;
+        }
+        else
+        {
+            KeysAudio.enabled = false;
+        }
     }
 }

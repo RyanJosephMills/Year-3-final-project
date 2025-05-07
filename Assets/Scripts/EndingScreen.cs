@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 public class EndingScreen : MonoBehaviour
 {
     public GameObject EndingScreenUI;
+    public AudioSource GirlScream;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GirlScream.enabled = true;
     }
 
     // Update is called once per frame

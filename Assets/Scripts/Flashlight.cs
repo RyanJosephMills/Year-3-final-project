@@ -33,6 +33,8 @@ public class Flashlight : MonoBehaviour
     public GameObject battery3;
     public GameObject battery4;
 
+    public AudioSource FlashlightOnandOff;
+
 
 
     void Start()
@@ -73,6 +75,14 @@ public class Flashlight : MonoBehaviour
 
     private void TriggerFlashlightVariables()
     {
+        if (Input.GetKey(KeyCode.F))
+        {
+            FlashlightOnandOff.enabled = true;
+        }
+        else
+        {
+            FlashlightOnandOff.enabled = false;
+        }
         if (on)
         {
             lifetime -= BatteryDrop * Time.deltaTime;

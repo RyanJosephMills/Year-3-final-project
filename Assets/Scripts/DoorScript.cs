@@ -17,6 +17,7 @@ public class DoorScript : MonoBehaviour
     public GameObject doorLocked;
     public GameObject doorUnlocked;
     PlayerMovement playerMovement;
+    public AudioSource DoorLockedSound;
 
     private void Awake()
     {
@@ -98,7 +99,15 @@ public class DoorScript : MonoBehaviour
             CheckDoor();
         }
         DoorTextTimer();
-
+        
+        if (playerMovement.IsInteractPressed && inReach && !hasKey)
+        {
+            DoorLockedSound.enabled = true;
+        }
+        else
+        {
+            DoorLockedSound.enabled = false;
+        }
     }
     public void CheckDoor()
     {

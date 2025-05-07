@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public float StaminaDrop;
     public float StaminaIncrease;
     private bool CanSprint = true;
+    public AudioSource Footsteps;
 
 
     Flashlight flashlightScript;
@@ -86,17 +87,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (canMove)
         {
-            CheckJump();
+           // CheckJump();
             ApplyMovement();
             //CheckCrouch();
             ApplyCamera();
-            
         }
     }
 
     private void ApplyMovement()
     {
-        float moveDirectionY = moveDirection.y;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            Footsteps.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled= false;
+        }
+
+            float moveDirectionY = moveDirection.y;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         float curSpeedX = (Sprinting && Stamina > 0 && CanSprint ? runSpeed : walkSpeed) * MoveInput.y;
