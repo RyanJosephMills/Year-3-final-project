@@ -27,6 +27,8 @@ public class Flashlight : MonoBehaviour
 
     public bool HasFlashlight = false;
 
+    public AudioSource FlashlightOnOffSFX;
+
     public GameObject battery;
     public GameObject battery1;
     public GameObject battery2;
@@ -44,7 +46,6 @@ public class Flashlight : MonoBehaviour
         battery2.SetActive(false);
         battery3.SetActive(false);
         battery4.SetActive(false);
-
 
     }
     private void Awake()
@@ -66,7 +67,10 @@ public class Flashlight : MonoBehaviour
             TriggerFlashlightVariables();
 
         }
-        
+        if (Input.GetKeyDown(KeyCode.F) && HasFlashlight)
+        {
+            FlashlightOnOffSFX.Play();
+        }
     }
 
 

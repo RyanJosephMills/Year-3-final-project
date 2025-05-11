@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject OptionsMenuUi;
     public TMP_Text StaminaUI;
     public GameObject StaminaActive;
+    public AudioSource FlashlightOnOffSFX;
+    public AudioSource KeySFX;
+    public AudioSource PickUpPaperSFX;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -79,6 +82,9 @@ public class PlayerMovement : MonoBehaviour
         ControlsMenuUI.SetActive(false);
         OptionsMenuUi.SetActive(false);
         StaminaActive.SetActive(false);
+        FlashlightOnOffSFX.Stop();
+        KeySFX.Stop();
+        PickUpPaperSFX.Stop();
     }
 
     void Update()

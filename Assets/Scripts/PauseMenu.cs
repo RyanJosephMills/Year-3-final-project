@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject PauseMenuUI;
     public GameObject BatteryUI;
     public GameObject BatteryLife;
-    public GameObject NoteUI;
+    //public GameObject NoteUI;
     public GameObject SettingsUI;
     public GameObject OptionsUI;
     public GameObject ControlsUI;
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject ObjectiveText;
     public GameObject FlashLightObjectiveText;
     public GameObject CameraUI;
-    public GameObject NoteNewUi;
+  //  public GameObject NoteNewUi;
     public GameObject imageObject;
     public GameObject OpeningObjective;
     public GameObject FinalObjective;
@@ -34,12 +34,12 @@ public class PauseMenu : MonoBehaviour
     MainDoor mainDoor;
     public GameObject Line;
     public GameObject Line1;
-    public GameObject Line2;
-    public GameObject Line3;
+    //public GameObject Line2;
+    //public GameObject Line3;
     public GameObject OpenClose;
     Flashlight Player;
-    public float Note = 0;
-    public TMP_Text NoteText;
+    //public float Note = 0;
+    //public TMP_Text NoteText;
 
     void Start()
     {
@@ -57,7 +57,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NoteText.text = Note.ToString();
+       // NoteText.text = Note.ToString();
         if (playerMovement.IsMenuPressed)
         {
             if (GameIsPaused)
@@ -107,29 +107,29 @@ public class PauseMenu : MonoBehaviour
         {
             FinalObjective.SetActive(true);
             Line1.SetActive(true);
-            Line2.SetActive(true);
-            Line3.SetActive(true);
+         //   Line2.SetActive(true);
+         //   Line3.SetActive(true);
         }
         else
         {
             FinalObjective.SetActive(false);
             Line1.SetActive(false);
-            Line2.SetActive(false);
-            Line3.SetActive(false);
+           // Line2.SetActive(false);
+           // Line3.SetActive(false);
         }
 
         if (!Player.HasFlashlight)
         {
             FlashLightObjectiveText.SetActive(true);
             ObjectiveText.SetActive(false);
-            NoteNewUi.SetActive(false);
+            //NoteNewUi.SetActive(false);
             Line.SetActive(false);
         }
         else if (Player.HasFlashlight)
         {
             Line.SetActive(true);
             ObjectiveText.SetActive(true);
-            NoteNewUi.SetActive(true);
+          //  NoteNewUi.SetActive(true);
             FlashLightObjectiveText.SetActive(true);
         }
 

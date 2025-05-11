@@ -20,7 +20,6 @@ public class PickUpFlashlight : MonoBehaviour
     public GameObject ItemHolder;
     public GameObject imageObject;
     public float displayTime = 3f;
-    public AudioSource PickUpFlashlightSFX;
     // Start is called before the first frame update
 
     private void Awake()
@@ -29,7 +28,6 @@ public class PickUpFlashlight : MonoBehaviour
     }
     void Start()
     {
-        PickUpFlashlightSFX.Stop();
         FlashlightLight.SetActive(false);
         FlashlightObject.SetActive(false);
         Batteries.SetActive(false);
@@ -45,7 +43,6 @@ public class PickUpFlashlight : MonoBehaviour
     {
         if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove)
         {
-            PickUpFlashlightSFX.Play();
             FlashlightObject.SetActive(true);
             FlashlightLight.SetActive(true);
             Batteries.SetActive(true);

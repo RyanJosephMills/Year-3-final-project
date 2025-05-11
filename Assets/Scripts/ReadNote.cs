@@ -19,6 +19,8 @@ public class ReadNote : MonoBehaviour
 
     public bool inReach;
 
+    public AudioSource PickUpPaperSFX;
+
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -32,6 +34,7 @@ public class ReadNote : MonoBehaviour
         invOB.SetActive(false);
         inReach = false;
         NoteInMenu = GameObject.Find("Pause Menu");
+        PickUpPaperSFX.Stop();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -58,7 +61,6 @@ public class ReadNote : MonoBehaviour
 
         if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove)
         {
-            NoteInMenu.GetComponent<PauseMenu>().Note += 1;
             noteUI.SetActive(true);
             hud.SetActive(false);
             GameIsPaused = true;
@@ -67,6 +69,8 @@ public class ReadNote : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             keyOB.SetActive(false);
             invOB.SetActive(true);
+            PickUpPaperSFX.Play();
+        //    NoteInMenu.GetComponent<PauseMenu>().Note += 1;
         }
     }        
     public void ExitButton()
@@ -78,6 +82,7 @@ public class ReadNote : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
         pickUpText.SetActive(false);
+
     }
-    
+
 }
