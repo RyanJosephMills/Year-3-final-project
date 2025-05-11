@@ -12,8 +12,7 @@ public class PickUpKey : MonoBehaviour
     public GameObject pickUpText;
     public GameObject EnemyAI;
     PlayerMovement playerMovement;
-    public AudioSource KeysAudio;
-
+    public AudioSource PickUpFlashlightSFX;
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -23,10 +22,10 @@ public class PickUpKey : MonoBehaviour
     public bool inReach;
     void Start()
     {
+
         inReach = false;
         pickUpText.SetActive(false);
         invOB.SetActive(false);
-        KeysAudio.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)
@@ -54,15 +53,11 @@ public class PickUpKey : MonoBehaviour
     {
         if (playerMovement.IsInteractPressed && inReach && playerMovement.canMove)
         {
+            PickUpFlashlightSFX.Play();
             keyOB.SetActive(false);
             invOB.SetActive(true);
             pickUpText.SetActive(false);
             EnemyAI.SetActive(true);
-            KeysAudio.enabled = true;
-        }
-        else
-        {
-            KeysAudio.enabled = false;
         }
     }
 }

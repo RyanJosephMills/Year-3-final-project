@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
     private bool CanSprint = true;
     public AudioSource Footsteps;
 
-
     Flashlight flashlightScript;
 
 
@@ -68,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         Stamina = MaxStamina;
         StaminaUI.text = $"Stamina: {Stamina}";
         StaminaUI.color = Color.green;

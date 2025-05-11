@@ -17,7 +17,6 @@ public class DoorScript : MonoBehaviour
     public GameObject doorLocked;
     public GameObject doorUnlocked;
     PlayerMovement playerMovement;
-    public AudioSource DoorLockedSound;
 
     private void Awake()
     {
@@ -43,7 +42,7 @@ public class DoorScript : MonoBehaviour
         hasKey = false;
         EnemyInReach = false;
         doorTextTimer = 1;
-
+        DoorClosed();
     }
 
     void OnTriggerEnter(Collider other)
@@ -100,14 +99,6 @@ public class DoorScript : MonoBehaviour
         }
         DoorTextTimer();
         
-        if (playerMovement.IsInteractPressed && inReach && !hasKey)
-        {
-            DoorLockedSound.enabled = true;
-        }
-        else
-        {
-            DoorLockedSound.enabled = false;
-        }
     }
     public void CheckDoor()
     {
