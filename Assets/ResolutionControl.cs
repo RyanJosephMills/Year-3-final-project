@@ -5,18 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.Audio;
 
-public class SettingsMenu : MonoBehaviour
+public class ResolutionControl : MonoBehaviour
 {
-
-    PlayerMovement playerMovement;
-
-    public AudioMixer audioMixer;
-
-    private void Awake()
-    {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-    }
-    
     public Dropdown resolutionsDropdown;
 
     Resolution[] resolutions;
@@ -24,7 +14,7 @@ public class SettingsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions;
 
         resolutionsDropdown.ClearOptions();
 
@@ -44,21 +34,16 @@ public class SettingsMenu : MonoBehaviour
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
-
     }
-
-    public void SetQuality(int qualityIndex)
-    {
-        QualitySettings.SetQualityLevel(qualityIndex, false);
-        
-    }
-    public void SetFullScreen(bool isFullScreen)
-    {
-        Screen.fullScreen = isFullScreen;
-    }
-    public void SetResolution (int resolutionIndex) 
+    public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }
