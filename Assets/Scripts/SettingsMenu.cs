@@ -24,7 +24,12 @@ public class SettingsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions;
+        // Print the resolutions
+        foreach (var res in resolutions)
+        {
+            Debug.Log(res.width + "x" + res.height + " : " + res.refreshRateRatio);
+        }
 
         resolutionsDropdown.ClearOptions();
 
@@ -32,13 +37,14 @@ public class SettingsMenu : MonoBehaviour
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = resolutions[i].ToString();
             options.Add(option);
 
             if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
+
         }
 
         resolutionsDropdown.AddOptions(options);
@@ -60,5 +66,7 @@ public class SettingsMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
     }
+
 }
