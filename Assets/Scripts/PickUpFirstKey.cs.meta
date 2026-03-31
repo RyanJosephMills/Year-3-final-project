@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e83cd1152714be14eb06bf84abd58a39
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - keyOB: {instanceID: 0}
+  - invOB: {instanceID: 0}
+  - pickUpText: {instanceID: 0}
+  - EnemyAI: {instanceID: 0}
+  - EnemySpawnText: {instanceID: 0}
+  - PickUpFlashlightSFX: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

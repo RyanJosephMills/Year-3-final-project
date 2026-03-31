@@ -20,6 +20,8 @@ public class PickUpFlashlight : MonoBehaviour
     public GameObject ItemHolder;
     public GameObject imageObject;
     public float displayTime = 3f;
+    public GameObject FlashlightPlacement;
+    public GameObject FlashlightPlacementINV;
     // Start is called before the first frame update
 
     private void Awake()
@@ -47,12 +49,13 @@ public class PickUpFlashlight : MonoBehaviour
             FlashlightLight.SetActive(true);
             Batteries.SetActive(true);
             battery1.SetActive(true);
-            Destroy(gameObject);
             pickUpText.SetActive(false);
+            FlashlightPlacement.SetActive(false);
             FindObjectOfType<Flashlight>().HasFlashlight = true;
             ItemHolder.SetActive(true);
             imageObject.SetActive(true);
             batteryText?.SetActive(true);
+            StartCoroutine(ShowAndHideImage());
         }
     }
     void OnTriggerEnter(Collider other)
@@ -72,5 +75,13 @@ public class PickUpFlashlight : MonoBehaviour
             inReach = false;
             pickUpText.SetActive(false);
         }
+    }
+    IEnumerator ShowAndHideImage()
+    {
+        imageObject.SetActive(true); // Make the image visible
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
+        FlashlightPlacementINV.SetActive(false);
+        imageObject.SetActive(false); // Make the image invisible
+        Debug.Log("Working");
     }
 }
