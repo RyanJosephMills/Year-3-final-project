@@ -2,36 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class EndingScreen : MonoBehaviour
+using static UnityEngine.Rendering.BoolParameter;
+public class LoseScreen : MonoBehaviour
 {
     public GameObject EndingScreenUI;
     public AudioSource GirlScream;
+    public float displayTime = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        GirlScream.enabled = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        StartCoroutine(ShowAndHideImage());
     }
-    public void Restart()
+    IEnumerator ShowAndHideImage()
     {
-        SceneManager.LoadScene("SampleScene");
-        EndingScreenUI.SetActive(false);
-
-    }
-    public void LoadMenu()
-    {
+        GirlScream.enabled = true;
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
         SceneManager.LoadScene("MainMenu");
-        EndingScreenUI.SetActive(false);
-    }
-    public void QuitGame()
-    {
-        Debug.Log("Quiting game....");
-        Application.Quit();
     }
 }

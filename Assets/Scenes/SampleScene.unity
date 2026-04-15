@@ -372,7 +372,6 @@ GameObject:
   - component: {fileID: 6010091}
   - component: {fileID: 6010090}
   - component: {fileID: 6010089}
-  - component: {fileID: 6010088}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -380,20 +379,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6010088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6010087}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34190772242eed4d8197ad2056d7ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpText: {fileID: 510854113}
-  inReach: 0
 --- !u!65 &6010089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5691,7 +5676,6 @@ GameObject:
   - component: {fileID: 149312649}
   - component: {fileID: 149312648}
   - component: {fileID: 149312647}
-  - component: {fileID: 149312646}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -5699,20 +5683,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &149312646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149312645}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34190772242eed4d8197ad2056d7ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpText: {fileID: 510854113}
-  inReach: 0
 --- !u!65 &149312647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71864,7 +71834,6 @@ GameObject:
   - component: {fileID: 1637972937}
   - component: {fileID: 1637972936}
   - component: {fileID: 1637972935}
-  - component: {fileID: 1637972934}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Win
@@ -71872,20 +71841,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1637972934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637972933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34190772242eed4d8197ad2056d7ecf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpText: {fileID: 510854113}
-  inReach: 0
 --- !u!65 &1637972935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79751,7 +79706,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

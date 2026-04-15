@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEngine.Rendering.BoolParameter;
-public class MainMenu : MonoBehaviour
+public class Intro : MonoBehaviour
 {
-    public GameObject introMenu;
+    public GameObject Story;
+    public AudioSource GirlScream;
     public float displayTime = 1f;
-    public GameObject mainMenu;
-    public void PlayGame()
+
+    // Start is called before the first frame update
+    void Start()
     {
-        StartCoroutine(ShowAndHideImage());
 
     }
-    public void QuitGame()
+
+    // Update is called once per frame
+    void Update()
     {
-        Debug.Log("Quiting game....");
-        Application.Quit();
+        if (Story)
+        {
+            StartCoroutine(ShowAndHideImage());
+        }
+
     }
     IEnumerator ShowAndHideImage()
     {
-        introMenu.SetActive(true);
-        mainMenu.SetActive(false);
         yield return new WaitForSeconds(displayTime); // Wait for the specified time
         SceneManager.LoadScene("SampleScene");
     }
+    
 }

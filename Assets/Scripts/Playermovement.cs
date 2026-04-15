@@ -86,6 +86,8 @@ public class PlayerMovement : MonoBehaviour
         FlashlightOnOffSFX.Stop();
         KeySFX.Stop();
         PickUpPaperSFX.Stop();
+        Footsteps.enabled = false;
+        Running.enabled = false;
     }
 
     void Update()
@@ -101,16 +103,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-        {
-            Footsteps.enabled = true;
-        }
-        else
-        {
-            Footsteps.enabled= false;
-        }
 
-            float moveDirectionY = moveDirection.y;
+
+        float moveDirectionY = moveDirection.y;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         float curSpeedX = (Sprinting && Stamina > 0 && CanSprint ? runSpeed : walkSpeed) * MoveInput.y;
@@ -158,6 +153,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Footsteps.enabled = true;
             Running.enabled = false;
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            Footsteps.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled = false;
         }
     }
 
