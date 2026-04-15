@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     public float StaminaIncrease;
     private bool CanSprint = true;
     public AudioSource Footsteps;
+    public AudioSource Running;
 
     Flashlight flashlightScript;
 
@@ -148,7 +149,16 @@ public class PlayerMovement : MonoBehaviour
             }
             StaminaUI.text = Stamina < 50 ? $"Stamina : {Mathf.Floor(Stamina)}" : $"Stamina : 50";
         }
-
+        if (Sprinting && Stamina >= 1)
+        {
+            Footsteps.enabled = false;
+            Running.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled = true;
+            Running.enabled = false;
+        }
     }
 
     IEnumerator StaminaCoolDown()
