@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource FlashlightOnOffSFX;
     public AudioSource KeySFX;
     public AudioSource PickUpPaperSFX;
+    public AudioSource Footsteps;
+    public AudioSource Running;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -56,8 +58,9 @@ public class PlayerMovement : MonoBehaviour
     public float StaminaDrop;
     public float StaminaIncrease;
     private bool CanSprint = true;
-    public AudioSource Footsteps;
-    public AudioSource Running;
+
+
+    
 
     Flashlight flashlightScript;
 
@@ -88,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         PickUpPaperSFX.Stop();
         Footsteps.enabled = false;
         Running.enabled = false;
+        Running.Stop();
+        
     }
 
     void Update()
