@@ -41,7 +41,7 @@ public class enemyAiPartrol : MonoBehaviour
 
     //state change
     [SerializeField] float sightRange;
-    bool playerInSight;
+    public bool playerInSight;
 
     // Start is called before the first frame update
     void Start()

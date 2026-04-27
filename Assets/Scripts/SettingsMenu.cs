@@ -26,10 +26,10 @@ public class SettingsMenu : MonoBehaviour
     {
         resolutions = Screen.resolutions;
         // Print the resolutions
-        foreach (var res in resolutions)
+    /*    foreach (var res in resolutions)
         {
             Debug.Log(res.width + "x" + res.height + " : " + res.refreshRateRatio);
-        }
+        }*/
 
         resolutionsDropdown.ClearOptions();
 
