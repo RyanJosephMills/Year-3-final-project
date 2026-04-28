@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 
 // This Code was from a tutorial on Youtube however I have no idea where the video has gone 
@@ -58,9 +59,11 @@ public class PlayerMovement : MonoBehaviour
     public float StaminaDrop;
     public float StaminaIncrease;
     private bool CanSprint = true;
+    private GameObject currentTeleporter;
+    public bool inReach;
 
 
-    
+
 
     Flashlight flashlightScript;
 
@@ -105,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
             ApplyCamera();
         }
     }
-
     private void ApplyMovement()
     {
 
@@ -313,4 +315,5 @@ public class PlayerMovement : MonoBehaviour
         IsUnlockdoorPressed = action.ReadValueAsButton();
 
     }
+
 }
