@@ -11,6 +11,7 @@ public class Returntocamera : MonoBehaviour
     PlayerMovement playerMovement;
     public GameObject playerg;
     public GameObject hideText;
+    public AudioSource EnterWardrobe;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class Returntocamera : MonoBehaviour
             Camera1.gameObject.SetActive(!Camera1.gameObject.activeSelf);
             Camera2.gameObject.SetActive(!Camera2.gameObject.activeSelf);
             hideText?.SetActive(false);
+            EnterWardrobe.Play();
         }
     }
 }
