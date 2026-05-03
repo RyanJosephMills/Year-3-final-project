@@ -61,6 +61,14 @@ public class PlayerMovement : MonoBehaviour
     private bool CanSprint = true;
     private GameObject currentTeleporter;
     public bool inReach;
+    public AudioSource GlassBreak;
+
+
+    public GameObject enemySpawn1;
+    public GameObject enemySpawn2;
+    public GameObject enemySpawn3;
+    public GameObject enemySpawn4;
+    public GameObject enemySpawn5;
 
 
 
@@ -95,6 +103,13 @@ public class PlayerMovement : MonoBehaviour
         Footsteps.enabled = false;
         Running.enabled = false;
         Running.Stop();
+        GlassBreak.Stop();
+        enemySpawn1.SetActive(false);
+        enemySpawn2.SetActive(false);
+
+        enemySpawn3.SetActive(false);
+        enemySpawn4.SetActive(false);
+        enemySpawn5.SetActive(false);
         
     }
 

@@ -25,4 +25,9 @@ public class MainMenu : MonoBehaviour
         yield return new WaitForSeconds(displayTime); // Wait for the specified time
         SceneManager.LoadScene("SampleScene");
     }
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }

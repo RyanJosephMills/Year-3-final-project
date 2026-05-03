@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainDoor : MonoBehaviour
 {
@@ -98,13 +99,12 @@ public class MainDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        hasKey = (KeyINV && KeyINV2.activeInHierarchy);
+        hasKey = (KeyINV.activeInHierarchy && KeyINV2.activeInHierarchy && KeyINV3.activeInHierarchy && KeyINV4.activeInHierarchy && KeyINV5.activeInHierarchy && KeyINV6.activeInHierarchy && KeyINV7.activeInHierarchy);
 
         if (playerMovement.IsInteractPressed && inReach)
         {
             DoorIsOpen = unlocked ? !DoorIsOpen : false;
             unlocked = hasKey;
-
             CheckDoor();
             doorTextTimer = 0;
         }
@@ -114,6 +114,10 @@ public class MainDoor : MonoBehaviour
             CheckDoor();
         }
         DoorTextTimer();
+        if(playerMovement.IsInteractPressed && inReach && KeyINV.activeInHierarchy && KeyINV2.activeInHierarchy && KeyINV3.activeInHierarchy && KeyINV4.activeInHierarchy && KeyINV5.activeInHierarchy && KeyINV6.activeInHierarchy && KeyINV7.activeInHierarchy)
+        {
+            SceneManager.LoadScene("Win");
+        }
 
     }
     public void CheckDoor()

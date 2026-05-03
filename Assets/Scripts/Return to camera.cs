@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Returntocamera : MonoBehaviour
 {
@@ -21,6 +20,7 @@ public class Returntocamera : MonoBehaviour
     {
         Camera1.gameObject.SetActive(false);
         Camera2.gameObject.SetActive(true);
+        hideText.SetActive(true);
     }
 
     // Update is called once per frame

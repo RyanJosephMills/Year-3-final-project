@@ -79,6 +79,7 @@ public class Flashlight : MonoBehaviour
 
         if (on)
         {
+            light.enabled = true;
             lifetime -= BatteryDrop * Time.deltaTime;
             light.intensity -= IntensityDrop * Time.deltaTime;
         }

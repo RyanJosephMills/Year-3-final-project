@@ -14,7 +14,7 @@ public class Teleporter : MonoBehaviour
     public Camera Camera2;
     enemyAiPartrol EnemyCode;
     public AudioSource EnterWardrobe;
-
+    public GameObject LeaveText;
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class Teleporter : MonoBehaviour
         Camera1.gameObject.SetActive(true);
         Camera2.gameObject.SetActive(false);
         EnterWardrobe.Stop();
+        LeaveText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,6 +62,8 @@ public class Teleporter : MonoBehaviour
             hideText.SetActive(false);
             EnemyCode.playerInSight = false;
             EnterWardrobe.Play();
+            LeaveText.SetActive(true);
+
             
         }
     }

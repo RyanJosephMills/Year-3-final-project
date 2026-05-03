@@ -16,6 +16,7 @@ public class PickUpFirstKey : MonoBehaviour
     PlayerMovement playerMovement;
     public float displayTime = 1f;
     public AudioSource PickUpKeySFX;
+ //   public GameObject NextScare;
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -63,6 +64,7 @@ public class PickUpFirstKey : MonoBehaviour
             invOB.SetActive(true);
             pickUpText.SetActive(false);
             EnemyAI.SetActive(true);
+       //     NextScare.SetActive(true);
 
 
 

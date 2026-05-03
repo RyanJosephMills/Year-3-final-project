@@ -103,7 +103,7 @@ public class PauseMenu : MonoBehaviour
         imageObject.SetActive(false);
         OpeningObjective.SetActive(false);
        
-        if (mainDoor.KeyINV5.activeInHierarchy)
+        if (mainDoor.KeyINV.activeInHierarchy && mainDoor.KeyINV2.activeInHierarchy && mainDoor.KeyINV3.activeInHierarchy && mainDoor.KeyINV4.activeInHierarchy && mainDoor.KeyINV5.activeInHierarchy && mainDoor.KeyINV6.activeInHierarchy && mainDoor.KeyINV7.activeInHierarchy)
         {
             FinalObjective.SetActive(true);
             Line1.SetActive(true);
