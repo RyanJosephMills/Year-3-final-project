@@ -63,6 +63,7 @@ public class Teleporter : MonoBehaviour
             EnemyCode.playerInSight = false;
             EnterWardrobe.Play();
             LeaveText.SetActive(true);
+            playerMovement.canMove = false;
 
             
         }

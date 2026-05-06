@@ -11,10 +11,12 @@ public class Returntocamera : MonoBehaviour
     public GameObject playerg;
     public GameObject hideText;
     public AudioSource EnterWardrobe;
+    Flashlight flashlight;
     // Start is called before the first frame update
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+        flashlight = FindObjectOfType<Flashlight>();
     }
         void Start()
     {
@@ -28,12 +30,16 @@ public class Returntocamera : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q))
         {
-            playerg.SetActive(true);
+            if (flashlight.HasFlashlight)
+            {
+                playerg.SetActive(true);
+            }
             // player.position = desternation.position;
             Camera1.gameObject.SetActive(!Camera1.gameObject.activeSelf);
             Camera2.gameObject.SetActive(!Camera2.gameObject.activeSelf);
             hideText?.SetActive(false);
             EnterWardrobe.Play();
+            playerMovement.canMove = true;
         }
     }
 }

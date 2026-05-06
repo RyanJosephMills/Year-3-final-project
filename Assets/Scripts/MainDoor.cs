@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.BoolParameter;
 
 public class MainDoor : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class MainDoor : MonoBehaviour
     public bool locked;
     public bool hasKey;
     public bool EnemyInReach;
+    public GameObject CantLeaveYet;
+    public float displayTime = 3f;
 
 
     public float doorTextTimer = 1;
@@ -64,6 +67,7 @@ public class MainDoor : MonoBehaviour
         hasKey = false;
         EnemyInReach = false;
         doorTextTimer = 1;
+        CantLeaveYet.SetActive(false);
 
     }
 
@@ -118,6 +122,11 @@ public class MainDoor : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
+        if(playerMovement.IsInteractPressed && inReach && !KeyINV.activeInHierarchy && !KeyINV2.activeInHierarchy && !KeyINV3.activeInHierarchy && !KeyINV4.activeInHierarchy && !KeyINV5.activeInHierarchy && !KeyINV6.activeInHierarchy && !KeyINV7.activeInHierarchy)
+        {
+            StartCoroutine(ShowAndHideImage());
+        }
+
 
     }
     public void CheckDoor()
@@ -140,6 +149,12 @@ public class MainDoor : MonoBehaviour
                 doorTextTimer = 1;
             }
         }
+    }
+    IEnumerator ShowAndHideImage()
+    {
+        CantLeaveYet.SetActive(true);
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
+        CantLeaveYet.SetActive(false);
     }
 
 }

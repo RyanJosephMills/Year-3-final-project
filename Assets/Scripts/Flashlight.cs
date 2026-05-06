@@ -105,6 +105,7 @@ public class Flashlight : MonoBehaviour
 
             }
         }
+        // Battery UI Text
         if (lifetime == 100)
         {
             battery.SetActive(true);
