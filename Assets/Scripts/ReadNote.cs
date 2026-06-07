@@ -10,9 +10,7 @@ public class ReadNote : MonoBehaviour
     public GameObject hud;
     public GameObject keyOB;
     public GameObject invOB;
-    private GameObject NotePickup;
     PlayerMovement playerMovement;
-    private GameObject NoteInMenu;
     public static bool GameIsPaused = false;
 
     public GameObject pickUpText;
@@ -33,7 +31,6 @@ public class ReadNote : MonoBehaviour
         pickUpText.SetActive(false);
         invOB.SetActive(false);
         inReach = false;
-        NoteInMenu = GameObject.Find("Pause Menu");
         PickUpPaperSFX.Stop();
     }
     void OnTriggerEnter(Collider other)
@@ -70,7 +67,7 @@ public class ReadNote : MonoBehaviour
             keyOB.SetActive(false);
             invOB.SetActive(true);
             PickUpPaperSFX.Play();
-        //    NoteInMenu.GetComponent<PauseMenu>().Note += 1;
+            playerMovement.GetComponent<PlayerMovement>().Notes += 1;
         }
     }        
     public void ExitButton()

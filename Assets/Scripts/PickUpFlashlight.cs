@@ -56,6 +56,7 @@ public class PickUpFlashlight : MonoBehaviour
             imageObject.SetActive(true);
             batteryText?.SetActive(true);
             StartCoroutine(ShowAndHideImage());
+            playerMovement.GetComponent<PlayerMovement>().NoteHolder.SetActive(true);
         }
     }
     void OnTriggerEnter(Collider other)

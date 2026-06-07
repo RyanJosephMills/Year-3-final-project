@@ -32,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource Footsteps;
     public AudioSource Running;
 
+    public TMP_Text NoteText;
+    public float Notes = 0;
+    public GameObject NoteHolder;
+
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -110,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
         enemySpawn3.SetActive(false);
         enemySpawn4.SetActive(false);
         enemySpawn5.SetActive(false);
+
+        NoteHolder.SetActive(false);
         
     }
 
@@ -121,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
             ApplyMovement();
             //CheckCrouch();
             ApplyCamera();
+
+            NoteText.text = Notes.ToString();
         }
     }
     private void ApplyMovement()
