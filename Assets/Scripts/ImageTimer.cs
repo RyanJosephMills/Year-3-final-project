@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ImageTimer : MonoBehaviour
@@ -17,5 +18,8 @@ public class ImageTimer : MonoBehaviour
         imageObject.SetActive(true); // Make the image visible
         yield return new WaitForSeconds(displayTime); // Wait for the specified time
         imageObject.SetActive(false); // Make the image invisible
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
+        StartCoroutine(ShowAndHideImage());
+
     }
 }

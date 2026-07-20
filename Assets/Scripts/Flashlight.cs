@@ -125,6 +125,7 @@ public class Flashlight : MonoBehaviour
             battery2.SetActive(false);
             battery3.SetActive(true);
         }
+
         if (lifetime <= 0)
         {
             battery3.SetActive(false);
