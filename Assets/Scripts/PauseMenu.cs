@@ -75,11 +75,11 @@ public class PauseMenu : MonoBehaviour
     }
    public void Resume()
     {
+        CameraUI.SetActive(true);
         PauseMenuUI.SetActive(false);
         SettingsUI.SetActive(false);
         ControlsUI.SetActive(false);
         OptionsUI.SetActive(false);
-        CameraUI.SetActive(true);
         StaminaUI.SetActive(true);
         OpenClose.SetActive(true);
         ObjectiveText.SetActive(false);
@@ -92,7 +92,6 @@ public class PauseMenu : MonoBehaviour
         playerMovement.canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
     void Pause()
     {
@@ -163,4 +162,5 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quiting game....");
         Application.Quit();
     }
+
 }

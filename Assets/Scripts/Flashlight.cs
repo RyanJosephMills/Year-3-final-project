@@ -59,15 +59,15 @@ public class Flashlight : MonoBehaviour
         FlashlightLifetime.text = lifetime.ToString("0") + "%";
         batteryText.text = batteries.ToString();
 
-        light.enabled = playerMovement.IsFlashlightPressed;
-        on = playerMovement.IsFlashlightPressed;
+        light.enabled = playerMovement.IsFlashlightPressed && playerMovement.canMove;
+        on = playerMovement.IsFlashlightPressed && playerMovement.canMove;
 
         if (HasFlashlight)
         {
             TriggerFlashlightVariables();
 
         }
-        if (Input.GetKeyDown(KeyCode.F) && HasFlashlight)
+        if (Input.GetKeyDown(KeyCode.F) && HasFlashlight && playerMovement.canMove)
         {
             FlashlightOnOffSFX.Play();
         }
@@ -77,7 +77,7 @@ public class Flashlight : MonoBehaviour
     private void TriggerFlashlightVariables()
     {
 
-        if (on)
+        if (on && playerMovement.canMove)
         {
             light.enabled = true;
             lifetime -= BatteryDrop * Time.deltaTime;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.Rendering.BoolParameter;
 
 public class ReadNote : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class ReadNote : MonoBehaviour
     public GameObject invOB;
     PlayerMovement playerMovement;
     public static bool GameIsPaused = false;
+    public float displayTime = 1f;
+    public GameObject GhostGirl;
+    public GameObject GhostGirlText;
+    public GameObject keyOBParent;
+    public GameObject keyOBChild;
 
     public GameObject pickUpText;
 
@@ -29,6 +35,8 @@ public class ReadNote : MonoBehaviour
         noteUI.SetActive(false);
         hud.SetActive(true);
         pickUpText.SetActive(false);
+        GhostGirl.SetActive(false);
+        GhostGirlText.SetActive(false);
         invOB.SetActive(false);
         inReach = false;
         PickUpPaperSFX.Stop();
@@ -64,10 +72,11 @@ public class ReadNote : MonoBehaviour
             playerMovement.canMove = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            keyOB.SetActive(false);
+//            keyOB.SetActive(false);
             invOB.SetActive(true);
             PickUpPaperSFX.Play();
-            playerMovement.GetComponent<PlayerMovement>().Notes += 1;
+
+
         }
     }        
     public void ExitButton()
@@ -79,7 +88,17 @@ public class ReadNote : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
         pickUpText.SetActive(false);
+        playerMovement.GetComponent<PlayerMovement>().Notes += 1;
+        StartCoroutine(ShowAndHideImage());
+        keyOBChild.SetActive(false);
+        GhostGirlText.SetActive(true);
 
     }
-
+    IEnumerator ShowAndHideImage()
+    {
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
+        GhostGirl.SetActive(true);
+        yield return new WaitForSeconds(displayTime); // Wait for the specified time
+        keyOBParent.SetActive(false);
+    }
 }
