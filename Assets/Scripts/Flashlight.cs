@@ -27,7 +27,13 @@ public class Flashlight : MonoBehaviour
 
     public bool HasFlashlight = false;
 
+    public AudioSource FlashlightOnOffSFX;
 
+    public GameObject battery;
+    public GameObject battery1;
+    public GameObject battery2;
+    public GameObject battery3;
+    public GameObject battery4;
 
     void Start()
     {
@@ -35,6 +41,11 @@ public class Flashlight : MonoBehaviour
         light = GetComponent<Light>();
         light.enabled = false;
         light.intensity = 25;
+        battery.SetActive(true);
+        battery1.SetActive(false);
+        battery2.SetActive(false);
+        battery3.SetActive(false);
+        battery4.SetActive(false);
 
     }
     private void Awake()
@@ -48,21 +59,27 @@ public class Flashlight : MonoBehaviour
         FlashlightLifetime.text = lifetime.ToString("0") + "%";
         batteryText.text = batteries.ToString();
 
-        light.enabled = playerMovement.IsFlashlightPressed;
-        on = playerMovement.IsFlashlightPressed;
+        light.enabled = playerMovement.IsFlashlightPressed && playerMovement.canMove;
+        on = playerMovement.IsFlashlightPressed && playerMovement.canMove;
 
         if (HasFlashlight)
         {
             TriggerFlashlightVariables();
+
         }
-        
+        if (Input.GetKeyDown(KeyCode.F) && HasFlashlight && playerMovement.canMove)
+        {
+            FlashlightOnOffSFX.Play();
+        }
     }
 
 
     private void TriggerFlashlightVariables()
     {
-        if (on)
+
+        if (on && playerMovement.canMove)
         {
+            light.enabled = true;
             lifetime -= BatteryDrop * Time.deltaTime;
             light.intensity -= IntensityDrop * Time.deltaTime;
         }
@@ -87,6 +104,32 @@ public class Flashlight : MonoBehaviour
                 light.intensity += 25;
 
             }
+        }
+        // Battery UI Text
+        if (lifetime == 100)
+        {
+            battery.SetActive(true);
+        }
+        if (lifetime <= 75)
+        {
+            battery.SetActive(false);
+            battery1.SetActive(true);
+        }
+        if (lifetime <= 50)
+        {
+            battery1.SetActive(false);
+            battery2.SetActive(true);
+        }
+        if(lifetime <= 25)
+        {
+            battery2.SetActive(false);
+            battery3.SetActive(true);
+        }
+
+        if (lifetime <= 0)
+        {
+            battery3.SetActive(false);
+            battery4.SetActive(true);
         }
         if (playerMovement.IsReloadPressed && batteries == 0)
         {

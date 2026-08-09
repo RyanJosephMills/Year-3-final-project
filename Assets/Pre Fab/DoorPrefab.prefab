@@ -228,6 +228,8 @@ MonoBehaviour:
   locked: 0
   hasKey: 0
   EnemyInReach: 0
+  DoorLockedSFX: {fileID: 0}
+  DoorUnlockedSFX: {fileID: 0}
   doorTextTimer: 1
   DoorIsOpen: 0
 --- !u!1001 &8303277086568273938

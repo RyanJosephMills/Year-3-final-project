@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
 
 
 // This Code was from a tutorial on Youtube however I have no idea where the video has gone 
@@ -25,6 +26,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject OptionsMenuUi;
     public TMP_Text StaminaUI;
     public GameObject StaminaActive;
+    public AudioSource FlashlightOnOffSFX;
+    public AudioSource KeySFX;
+    public AudioSource PickUpPaperSFX;
+    public AudioSource Footsteps;
+    public AudioSource Running;
+
+    public TMP_Text NoteText;
+    public float Notes = 0;
+    public GameObject NoteHolder;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -53,6 +63,18 @@ public class PlayerMovement : MonoBehaviour
     public float StaminaDrop;
     public float StaminaIncrease;
     private bool CanSprint = true;
+    private GameObject currentTeleporter;
+    public bool inReach;
+    public AudioSource GlassBreak;
+
+
+    public GameObject enemySpawn1;
+    public GameObject enemySpawn2;
+    public GameObject enemySpawn3;
+    public GameObject enemySpawn4;
+    public GameObject enemySpawn5;
+
+
 
 
     Flashlight flashlightScript;
@@ -67,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         Stamina = MaxStamina;
         StaminaUI.text = $"Stamina: {Stamina}";
         StaminaUI.color = Color.green;
@@ -80,22 +101,40 @@ public class PlayerMovement : MonoBehaviour
         ControlsMenuUI.SetActive(false);
         OptionsMenuUi.SetActive(false);
         StaminaActive.SetActive(false);
+        FlashlightOnOffSFX.Stop();
+        KeySFX.Stop();
+        PickUpPaperSFX.Stop();
+        Footsteps.enabled = false;
+        Running.enabled = false;
+        Running.Stop();
+        GlassBreak.Stop();
+        enemySpawn1.SetActive(false);
+        enemySpawn2.SetActive(false);
+
+        enemySpawn3.SetActive(false);
+        enemySpawn4.SetActive(false);
+        enemySpawn5.SetActive(false);
+
+        NoteHolder.SetActive(false);
+        
     }
 
     void Update()
     {
         if (canMove)
         {
-            CheckJump();
+           // CheckJump();
             ApplyMovement();
             //CheckCrouch();
             ApplyCamera();
-            
+
+            NoteText.text = Notes.ToString();
         }
     }
-
     private void ApplyMovement()
     {
+
+
         float moveDirectionY = moveDirection.y;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -135,7 +174,24 @@ public class PlayerMovement : MonoBehaviour
             }
             StaminaUI.text = Stamina < 50 ? $"Stamina : {Mathf.Floor(Stamina)}" : $"Stamina : 50";
         }
-
+        if (Sprinting && Stamina >= 1)
+        {
+            Footsteps.enabled = false;
+            Running.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled = true;
+            Running.enabled = false;
+        }
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            Footsteps.enabled = true;
+        }
+        else
+        {
+            Footsteps.enabled = false;
+        }
     }
 
     IEnumerator StaminaCoolDown()
@@ -282,4 +338,5 @@ public class PlayerMovement : MonoBehaviour
         IsUnlockdoorPressed = action.ReadValueAsButton();
 
     }
+
 }

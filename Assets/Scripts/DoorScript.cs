@@ -28,6 +28,7 @@ public class DoorScript : MonoBehaviour
     public bool locked;
     public bool hasKey;
     public bool EnemyInReach;
+    public AudioSource DoorLockedSFX;
 
 
     public float doorTextTimer = 1;
@@ -42,6 +43,7 @@ public class DoorScript : MonoBehaviour
         hasKey = false;
         EnemyInReach = false;
         doorTextTimer = 1;
+        DoorLockedSFX.Stop();
     }
 
     void OnTriggerEnter(Collider other)
@@ -87,7 +89,6 @@ public class DoorScript : MonoBehaviour
             DoorIsOpen = unlocked ? !DoorIsOpen : false;
             doorTextTimer = unlocked ? 1.3f : 0f;
             unlocked = hasKey;
-            
             CheckDoor();
             
         }
@@ -97,7 +98,12 @@ public class DoorScript : MonoBehaviour
             CheckDoor();
         }
         DoorTextTimer();
+        if(playerMovement.IsInteractPressed && inReach && !unlocked)
+        {
+            DoorLockedSFX.Play();
+        }
 
+        
     }
     public void CheckDoor()
     {

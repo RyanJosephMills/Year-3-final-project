@@ -13,35 +13,51 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject PauseMenuUI;
     public GameObject BatteryUI;
-    public GameObject NoteUI;
-    public GameObject BatteryHealthUI;
+    public GameObject BatteryLife;
+    //public GameObject NoteUI;
     public GameObject SettingsUI;
     public GameObject OptionsUI;
     public GameObject ControlsUI;
     public GameObject StaminaUI;
     public GameObject ObjectiveText;
-    public float Notes = 0;
-    public TMP_Text NoteText;
+    public GameObject FlashLightObjectiveText;
+    public GameObject CameraUI;
+  //  public GameObject NoteNewUi;
+    public GameObject imageObject;
+    public GameObject OpeningObjective;
+    public GameObject FinalObjective;
     public AudioSource GameAudio;
+    public AudioSource Wind;
+    public AudioSource FootSteps;
+    public AudioSource CreepyMusic;
     PlayerMovement playerMovement;
+    MainDoor mainDoor;
+    public GameObject Line;
+    public GameObject Line1;
+    //public GameObject Line2;
+    //public GameObject Line3;
+    public GameObject OpenClose;
+    Flashlight Player;
+    //public float Note = 0;
+    //public TMP_Text NoteText;
 
     void Start()
     {
 
     }
-
-
-
-
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+
+        Player = FindAnyObjectByType<Flashlight>();
+
+        mainDoor = FindObjectOfType<MainDoor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        NoteText.text = Notes.ToString();
+       // NoteText.text = Note.ToString();
         if (playerMovement.IsMenuPressed)
         {
             if (GameIsPaused)
@@ -59,30 +75,67 @@ public class PauseMenu : MonoBehaviour
     }
    public void Resume()
     {
+        CameraUI.SetActive(true);
         PauseMenuUI.SetActive(false);
         SettingsUI.SetActive(false);
         ControlsUI.SetActive(false);
         OptionsUI.SetActive(false);
-        BatteryUI.SetActive(true);
-        BatteryHealthUI.SetActive(true);
         StaminaUI.SetActive(true);
+        OpenClose.SetActive(true);
         ObjectiveText.SetActive(false);
+        FlashLightObjectiveText.SetActive(false);
         GameAudio.Play();
+        Wind.Play();
+        CreepyMusic.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
         playerMovement.canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
     void Pause()
     {
         PauseMenuUI.SetActive(true);
-        BatteryUI.SetActive(false);
-        BatteryHealthUI.SetActive(false);
+        CameraUI.SetActive(false);
+        OpenClose.SetActive(false);
         StaminaUI.SetActive(false);
-        ObjectiveText.SetActive(true);
+        imageObject.SetActive(false);
+        OpeningObjective.SetActive(false);
+       
+        if (mainDoor.KeyINV.activeInHierarchy && mainDoor.KeyINV2.activeInHierarchy && mainDoor.KeyINV3.activeInHierarchy && mainDoor.KeyINV4.activeInHierarchy && mainDoor.KeyINV5.activeInHierarchy && mainDoor.KeyINV6.activeInHierarchy && mainDoor.KeyINV7.activeInHierarchy)
+        {
+            FinalObjective.SetActive(true);
+            Line1.SetActive(true);
+         //   Line2.SetActive(true);
+         //   Line3.SetActive(true);
+        }
+        else
+        {
+            FinalObjective.SetActive(false);
+            Line1.SetActive(false);
+           // Line2.SetActive(false);
+           // Line3.SetActive(false);
+        }
+
+        if (!Player.HasFlashlight)
+        {
+            FlashLightObjectiveText.SetActive(true);
+            ObjectiveText.SetActive(false);
+            //NoteNewUi.SetActive(false);
+            Line.SetActive(false);
+        }
+        else if (Player.HasFlashlight)
+        {
+            Line.SetActive(true);
+            ObjectiveText.SetActive(true);
+          //  NoteNewUi.SetActive(true);
+            FlashLightObjectiveText.SetActive(true);
+        }
+
         GameAudio.Pause();
+        Wind.Pause();
+        FootSteps.Pause();
+        CreepyMusic.Pause();
         Time.timeScale = 0f;
         GameIsPaused = true;
         playerMovement.canMove = false;
@@ -109,4 +162,5 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("Quiting game....");
         Application.Quit();
     }
+
 }

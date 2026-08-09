@@ -120,7 +120,7 @@ QualitySettings:
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
     anisotropicTextures: 1
-    antiAliasing: 2
+    antiAliasing: 0
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 1
@@ -157,6 +157,6 @@ QualitySettings:
   m_PerPlatformDefaultQuality:
     Android: 0
     Server: 0
-    Standalone: 2
+    Standalone: 0
     WebGL: 0
     iPhone: 0

@@ -3,22 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
+
     PlayerMovement playerMovement;
-    Resolution[] resolutions;
+
+    public AudioMixer audioMixer;
 
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
+    
     public Dropdown resolutionsDropdown;
+
+    Resolution[] resolutions;
 
     // Start is called before the first frame update
     void Start()
     {
-       resolutions = Screen.resolutions;
+        resolutions = Screen.resolutions;
+        // Print the resolutions
+    /*    foreach (var res in resolutions)
+        {
+            Debug.Log(res.width + "x" + res.height + " : " + res.refreshRateRatio);
+        }*/
 
         resolutionsDropdown.ClearOptions();
 
@@ -26,28 +37,25 @@ public class SettingsMenu : MonoBehaviour
         int currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = resolutions[i].ToString();
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
             {
                 currentResolutionIndex = i;
             }
+
         }
 
         resolutionsDropdown.AddOptions(options);
         resolutionsDropdown.value = currentResolutionIndex;
         resolutionsDropdown.RefreshShownValue();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
+
     public void SetQuality(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex,false);
+        QualitySettings.SetQualityLevel(qualityIndex, false);
         
     }
     public void SetFullScreen(bool isFullScreen)
@@ -58,5 +66,7 @@ public class SettingsMenu : MonoBehaviour
     {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+
     }
+
 }
